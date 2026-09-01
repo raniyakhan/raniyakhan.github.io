@@ -1,0 +1,28 @@
+body {
+    background-color: rgb(255, 255, 255);
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+    line-height: 1.6;
+    color: black;
+}
+
+img {
+    max-width: 100%;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+}
+ 
+.figure {
+    flex: 1;
+    text-align: center;
+}
+ 
+.gif{
+    max-width: 50%;
+    
+}
