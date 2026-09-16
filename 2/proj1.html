@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CS180 Project 1: Colorizing the Prokudin-Gorskii Collection</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<h1>Colorizing the Prokudin-Gorskii Photo Collection</h1>
+
+<p>
+  Sergei Prokudin-Gorskii captured color scenes in the early 1900s by
+  photographing each scene three times through red, green, and blue
+  filters, producing three separate exposures on a single glass plate.
+  To reconstruct a color image, these three channels need to be
+  aligned and stacked. This project implements that alignment
+  automatically, using both a single-scale brute-force search and a
+  multi-scale image pyramid for larger images.
+</p>
+
+<h2>Step 1: Single-Scale Alignment</h2>
+<p>
+  For the smaller JPEG images, it was feasible to do an exhaustive search. Each image was split into three equal horizontal sections
+  (blue, green, red), and every displacement in a
+  <code>[-20, 20]</code> window was tested to find the best alignment
+  of green and red against blue.
+</p>
+<p>
+  I tried out two similarity metrics. L2 norm scores a candidate
+  shift by the Euclidean distance between the shifted channel and
+  blue, with the lowest distance winning. I also used Normalized Cross-Correlation
+  (NCC) which mean-subtracts and normalizes both channels before
+  taking their dot product, with the highest score winning. There wasn't a significant visual difference between the two, 
+  but I decided to use NCC, since it is less sensitive
+  to brightness differences between channels than raw L2 distance.
+</p>
+<p>
+  The biggest adjustment to improve results was cropping. I cropped to the central
+  80% of each image before scoring. The raw plate borders contain scan
+  artifacts and edge noise that are not part of the actual scene, and
+  including them in the similarity calculation was distorting the
+  search. The crop was used only for scoring; the resulting shift was
+  still applied to the full image.
+</p>
+
+<div class="row">
+  <div class="figure">
+    <img src="media/jpg/cathedral.jpg" alt="Cathedral aligned">
+    <p>Cathedral<br>green (5, 2), red (12, 3)</p>
+  </div>
+  <div class="figure">
+    <img src="media/jpg/monastery.jpg" alt="Monastery aligned">
+    <p>Monastery<br>green (-3, 2), red (3, 2)</p>
+  </div>
+  <div class="figure">
+    <img src="media/jpg/tobolsk.jpg" alt="Tobolsk aligned">
+    <p>Tobolsk<br>green (3, 3), red (6, 3)</p>
+  </div>
+</div>
+
+<h2>Step 2: Multi-Scale Pyramid Alignment</h2>
+<p>
+  While an exhaustive search over <code>[-20, 20]</code> is inexpensive on a
+  small image, it took forever on the full-resolution glass
+  plate scans, since true displacements could be much larger and hence each
+  comparison was far more costly.
+</p>
+<p>
+  To handle this, I used a coarse-to-fine image pyramid. The
+  image was downscaled, and a coarse search was performed
+  at that resolution. The resulting estimate was then doubled and used as
+  the starting point for a narrower refinement search at each
+  successive, less-downscaled level, until the full resolution
+  was reached. This replaced one expensive full-resolution search with
+  a sequence of much cheaper searches at progressively finer scales.
+  The same NCC-based scoring and central cropping from the
+  single-scale version was used at every pyramid level.
+</p>
+
+<div class="row">
+  <div class="figure">
+    <img src="media/tif/church.jpg" alt="Church aligned">
+    <p>Church<br>green (25, 4), red (58, -4)</p>
+  </div>
+  <div class="figure">
+    <img src="media/tif/harvesters.jpg" alt="Harvesters aligned">
+    <p>Harvesters<br>green (60, 17), red (124, 13)</p>
+  </div>
+  <div class="figure">
+    <img src="media/tif/icon.jpg" alt="Icon aligned">
+    <p>Icon<br>green (41, 17), red (89, 23)</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="figure">
+    <img src="media/tif/ilemselga.jpg" alt="Ilemselga aligned">
+    <p>Ilemselga<br>green (40, 7), red (130, 11)</p>
+  </div>
+  <div class="figure">
+    <img src="media/tif/religous_painting.jpg" alt="Religious Painting aligned">
+    <p>Religious Painting<br>green (28, 3), red (68, 7)</p>
+  </div>
+  <div class="figure">
+    <img src="media/tif/wharf.jpg" alt="Wharf aligned">
+    <p>Wharf<br>green (15, -7), red (83, -16)</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="figure">
+    <img src="media/tif/melons.jpg" alt="Melons aligned">
+    <p>Melons<br>green (82, 11), red (178, 13)</p>
+  </div>
+  <div class="figure">
+    <img src="media/tif/self_portrait.jpg" alt="Self Portrait aligned">
+    <p>Self Portrait<br>green (79, 29), red (176, 37)</p>
+  </div>
+  <div class="figure">
+    <img src="media/tif/siren.jpg" alt="Siren aligned">
+    <p>Siren<br>green (49, -6), red (96, -25)</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="figure">
+    <img src="media/tif/three_generations.jpg" alt="Three Generations aligned">
+    <p>Three Generations<br>green (53, 14), red (112, 11)</p>
+  </div>
+  <div class="figure">
+    <img src="media/tif/emir.jpg" alt="Emir  aligned">
+    <p>Emir<br>green (49, 24), red (144, -209)</p>
+  </div>
+  <div class="figure">
+    
+  </div>
+</div>
+
+<h2>Step 3: Additional Images</h2>
+<p>
+  The same pyramid pipeline was applied to three images I particularly liked from the Prokudin-Gorskii collection.
+</p>
+
+<div class="row">
+  <div class="figure">
+    <img src="media/pers/kurmy.jpg" alt="My image 1 aligned">
+    <p>Kurmy<br>green (25, -18), red (116, -38)</p>
+  </div>
+  <div class="figure">
+    <img src="media/pers/maki.jpg" alt="My image 2 aligned">
+    <p>Maki]<br>green (8, 8), red (60, 13)</p>
+  </div>
+  <div class="figure">
+    <img src="media/pers/piony.jpg" alt="My image 3 aligned">
+    <p>Piony<br>green (51, 3), red (104, -6)</p>
+  </div>
+</div>
+
+<h2>Alignment Failures</h2>
+<p>
+  The pyramid alignment did not produce a clean result on
+  <code>emir.tif</code>. Instead of a sharp composite, the output
+  shows a double image.
+</p>
+
+<div class="row">
+    <div class="figure">
+        
+      </div>
+      <div class="figure">
+        <img src="media/tif/emir.jpg" alt="Emir  aligned">
+        <p>Emir<br>green (49, 24), red (144, -209)</p>
+      </div>
+  <div class = "figure"></div>
+</div>
+
+<p>
+  This is because raw-pixel NCC is less reliable when the
+  brightness relationship between channels is inconsistent across the
+  scene. As the project scope notes, in this image, the three channels do
+  not share the same brightness values across matching regions, which
+  caused the raw-pixel similarity metric to struggle.
+</p>
+
+</body>
+</html>
