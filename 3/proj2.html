@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CS180 Project 2: Fun with Filters and Frequencies!</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <h1>CS180 Project 2: Fun with Filters and Frequencies!</h1>
+
+    <h2>Part 1: Fun with Filters</h2>
+    
+    <h3>Part 1.1: Convolutions from Scratch!</h3>
+    
+    <p>
+      Both 2D convolution implementations flip the filter, use zero-padding for "same" padding, and, at each
+      position, sums the elementwise products of the filter with the underlying
+      image patch. There is a four-loop version and a two-loop version that
+      vectorizes the filter application with a single <code>np.sum</code> over a
+      sliced patch.
+    </p>
+    
+    <h4>Four-loop implementation</h4>
+    <pre><code>def convolution_four(img, filter):
+      h, w = img.shape
+      fh, fw = filter.shape
+    
+      pad_y = (fh-1)//2
+      pad_x = (fw-1)//2
+    
+      pad = np.pad(img, ((pad_y, pad_y), (pad_x, pad_x)), mode="constant", constant_values=0)
+    
+      kernel_flipped = filter[::-1, ::-1]
+    
+      out = np.zeros((h,w))
+    
+      for hi in range(h):
+        for wi in range(w):
+          for fhi in range(fh):
+            for fwi in range(fw):
+              out[hi, wi] += pad[hi+fhi, wi+fwi] * kernel_flipped[fhi, fwi]
+    
+      return out
+    </code></pre>
+    
+    <h4>Two-loop implementation</h4>
+    <pre><code>def convolution_two(img, filter):
+      h, w = img.shape
+      fh, fw = filter.shape
+    
+      pad_y = (fh-1)//2
+      pad_x = (fw-1)//2
+    
+      pad = np.pad(img, ((pad_y, pad_y), (pad_x, pad_x)), mode="constant", constant_values=0)
+    
+      kernel_flipped = filter[::-1, ::-1]
+    
+      out = np.zeros((h,w))
+    
+      for hi in range(h):
+        for wi in range(w):
+            patch = pad[hi:hi+fh, wi:wi+fw]
+            out[hi, wi] = np.sum(patch * kernel_flipped)
+    
+      return out
+    </code></pre>
+    
+    <p>
+      I verified both against
+      <code>scipy.signal.convolve2d(img, filter, mode='same')</code> using
+      <code>np.allclose</code>, with the 9x9 box filter and the
+      finite difference operator <code>Dx</code>, and it returned <code>True</code> in both
+      cases.
+    </p>
+    
+    <h4>Runtime</h4>
+    <table border="1" cellpadding="6" cellspacing="0">
+      <tr><th>Filter</th><th>Four-loop</th><th>Two-loop</th></tr>
+      <tr><td>Dx (3 elements)</td><td>14.7s</td><td>42.9s</td></tr>
+      <tr><td>9x9 box (81 elements)</td><td>354.2s</td><td>43.3s</td></tr>
+    </table>
+    <p>
+      I noticed the two-loop version was actually taking longer on the finite difference operators and decided to
+      figure out what was going on. The two-loop version's runtime is nearly constant with filter size, since
+      the inner loop is vectorized and most of the time is taken by the outer pixel loop.
+      The four-loop version scales with filter size, since every filter weight is
+      visited by an explicit Python loop. <code>scipy.signal.convolve2d</code> outperforms both by a lot regardless of filter size.
+    </p>
+    
+    <h4>Boundary handling</h4>
+    <p>
+      All versions zero-pad the image by <code>(filter_size - 1) / 2</code> on
+      each side so the filter can be centered on every pixel, including edges,
+      keeping the output the same size as the input.
+    </p>
+    
+    <h4>Results</h4>
+    <div class="image-grid-2x2">
+      <div class="image-box">
+        <img src="media/self.jpg" alt="Original self-portrait">
+        <p>Original</p>
+      </div>
+      <div class="image-box">
+        <img src="media/self_box.jpg" alt="Self-portrait convolved with 9x9 box filter">
+        <p>9x9 box filter (all entries 1/81)</p>
+      </div>
+      <div class="image-box">
+        <img src="media/self_dx.jpg" alt="Self-portrait convolved with Dx">
+        <p><code>Dx = [[1, 0, -1]]</code></p>
+      </div>
+      <div class="image-box">
+        <img src="media/self_dy.jpg" alt="Self-portrait convolved with Dy">
+        <p><code>Dy = [[1], [0], [-1]]</code></p>
+      </div>
+    </div>
+
+
+    <h3>Part 1.2: Finite Difference Operator</h3>
+
+    <p>
+      Convolving the cameraman image with the finite difference operators
+      <code>Dx = [[1, 0, -1]]</code> and <code>Dy = Dx.T</code> gives the partial
+      derivatives in x and y. Combining them into the gradient magnitude,
+      <code>mag = sqrt(dx² + dy²)</code>, gives a single per-pixel measure of edge
+      strength regardless of direction. When I binarized <code>mag</code> at a
+      threshold of my choice, it produced an edge image.
+    </p>
+    
+    <div class="image-grid-2x2">
+      <div class="image-box">
+        <img src="media/cm_dx.jpg" alt="Cameraman partial derivative in x">
+        <p>&part;/&part;x</p>
+      </div>
+      <div class="image-box">
+        <img src="media/cm_dy.jpg" alt="Cameraman partial derivative in y">
+        <p>&part;/&part;y</p>
+      </div>
+      <div class="image-box">
+        <img src="media/cm_mag.jpg" alt="Cameraman gradient magnitude">
+        <p>Gradient magnitude</p>
+      </div>
+      <div class="image-box">
+        <img src="media/cm_edge_thresh0.2.jpg" alt="Cameraman binarized edge image, threshold 0.2">
+        <p>Binarized edges (threshold = 0.2)</p>
+      </div>
+    </div>
+    
+    <p>
+      I tested thresholds of 0.1, 0.15, 0.2, and 0.3. Lower thresholds (0.1,
+      0.15) captured more edges but also let through noise in like the grass in the foreground. 
+      Higher thresholds (0.3) removed almost all the noise but started breaking up the actual
+      edges.
+      I decided on <b>threshold = 0.2</b> because it keeps the
+      cameraman's silhouette, face, camera, and tripod as continuous, connected
+      edges, but there is some residual speckling in the grass.
+    </p>
+
+    <h3>Part 1.3: Derivative of Gaussian (DoG) Filter</h3>
+
+<p>
+  Smoothing with a Gaussian before taking the finite differences was helpful at reducing noise. 
+  The 2D Gaussian filter was built by taking a 1D kernel from <code>cv2.getGaussianKernel</code> 
+  and taking its outer product with its own transpose.
+</p>
+
+<h4>Blur, then differentiate</h4>
+<div class="image-grid-2x2">
+  <div class="image-box">
+    <img src="media/cm_blur_dx.jpg" alt="Blurred cameraman, partial derivative in x">
+    <p>&part;/&part;x (blurred)</p>
+  </div>
+  <div class="image-box">
+    <img src="media/cm_blur_dy.jpg" alt="Blurred cameraman, partial derivative in y">
+    <p>&part;/&part;y (blurred)</p>
+  </div>
+  <div class="image-box">
+    <img src="media/cm_blur_mag.jpg" alt="Blurred cameraman gradient magnitude">
+    <p>Gradient magnitude</p>
+  </div>
+  <div class="image-box">
+    <img src="media/cm_blur_edge_thresh0.1.jpg" alt="Blurred cameraman binarized edges">
+    <p>Binarized edges (threshold = 0.1)</p>
+  </div>
+</div>
+
+<p>
+  <b>Differences from Part 1.2:</b> blurring before differentiating removes
+  most of the speckled noise that could be seen in areas like the
+  the grass, so I could use a more sensitive threshold (0.1 vs. 0.2) 
+  without introducing noise. It also made the edges slightly thicker.
+</p>
+
+<h4>Derivative of Gaussian (single convolution)</h4>
+<p>
+  Since convolution is associative, you can combing both blurring and differentiating 
+  into one filter. <code>DoG_x = G * Dx</code>,
+  convolved with <code>mode='full'</code> so no part of the combined filter is
+  cropped. Convolving the image with this single filter gives the same
+  result as blurring then differentiating separately.
+</p>
+
+<div class="image-grid-2x2">
+  <div class="image-box">
+    <img src="media/dog_x_filter.jpg" alt="DoG_x filter visualization">
+    <p>DoG<sub>x</sub> filter</p>
+  </div>
+  <div class="image-box">
+    <img src="media/dog_y_filter.jpg" alt="DoG_y filter visualization">
+    <p>DoG<sub>y</sub> filter</p>
+  </div>
+  <div class="image-box">
+    <img src="media/cm_dog_dx.jpg" alt="Cameraman convolved with DoG_x">
+    <p>Image &lowast; DoG<sub>x</sub></p>
+  </div>
+  <div class="image-box">
+    <img src="media/cm_dog_dy.jpg" alt="Cameraman convolved with DoG_y">
+    <p>Image &lowast; DoG<sub>y</sub></p>
+  </div>
+</div>
+
+<div class="image-grid-2x2">
+  <div class="image-box">
+    <img src="media/cm_dog_mag.jpg" alt="DoG gradient magnitude">
+    <p>Gradient magnitude</p>
+  </div>
+  <div class="image-box">
+    <img src="media/cm_dog_edge_thresh0.1.jpg" alt="DoG binarized edges">
+    <p>Binarized edges (threshold = 0.1)</p>
+  </div>
+</div>
+
+
+<h2>Part 2: Fun with Frequencies!</h2>
+
+<h3>Part 2.1: Image "Sharpening"</h3>
+
+<p>
+  For sharpening, I begin by using a gaussian filter to get a blurred version
+  of the original image. Subtracting that blurred
+  version from the original isolates the high frequencies(ie. edges and fine
+  detail)that the blur removed. Adding some extra weight of those high
+  frequencies back onto the original makes detail more prominent, sharpening the image. Algebraically,
+</p>
+<p>
+  <code>sharpened = img + &alpha;(img &minus; blurred) = img &lowast; [(1+&alpha;)e &minus; &alpha;G]</code>
+</p>
+<p>
+  where <code>e</code> is the unit impulse filter and <code>G</code> is the
+  Gaussian. Since blurring is also done via convolution, both steps can be combined into one convolution.
+  I verified that both approaches return the same thing, since (<code>np.allclose</code> returns
+  <code>True</code>).
+</p>
+
+<h4>Taj Mahal</h4>
+<div class="image-grid-2x2">
+  <div class="image-box">
+    <img src="media/taj_original.jpg" alt="Original Taj Mahal image">
+    <p>Original</p>
+  </div>
+  <div class="image-box">
+    <img src="media/taj_blurred.jpg" alt="Blurred Taj Mahal image">
+    <p>Blurred (low freq)</p>
+  </div>
+  <div class="image-box">
+    <img src="media/taj_highfreq.jpg" alt="Taj Mahal high-frequency component">
+    <p>High freq (original &minus; blurred)</p>
+  </div>
+  <div class="image-box">
+    <img src="media/taj_sharpened_a1.jpg" alt="Sharpened Taj Mahal image, alpha=1">
+    <p>Sharpened (&alpha;=1)</p>
+  </div>
+</div>
+
+<h4>Varying the sharpening amount</h4>
+<div class="image-grid-2x2">
+  <div class="image-box">
+    <img src="media/taj_sharpened_a1.jpg" alt="Sharpened Taj Mahal, alpha=1">
+    <p>&alpha; = 1</p>
+  </div>
+  <div class="image-box">
+    <img src="media/taj_sharpened_a2.jpg" alt="Sharpened Taj Mahal, alpha=2">
+    <p>&alpha; = 2</p>
+  </div>
+  <div class="image-box">
+    <img src="media/taj_sharpened_a4.jpg" alt="Sharpened Taj Mahal, alpha=4">
+    <p>&alpha; = 4</p>
+  </div>
+</div>
+<p>
+  As &alpha; increases, edges become clearer, but negative side effects like haloing around strong edges
+  and noise in flatter areas also worsen. After a certain point the
+  result looks harsh and over-processed instead of sharper. The image of my friend Tia is a good example of that.
+</p>
+
+<h4>Second image: Tia</h4>
+<div class="image-grid-2x2">
+  <div class="image-box">
+    <img src="media/tia_original.jpg" alt="Original Tia image">
+    <p>Original</p>
+  </div>
+  <div class="image-box">
+    <img src="media/tia_blurred.jpg" alt="Blurred Tia image">
+    <p>Blurred (low freq)</p>
+  </div>
+  <div class="image-box">
+    <img src="media/tia_highfreq.jpg" alt="Tia high-frequency component">
+    <p>High freq (original &minus; blurred)</p>
+  </div>
+  <div class="image-box">
+    <img src="media/tia_sharpened_a10.jpg" alt="Sharpened Tia image, alpha=10">
+    <p>Sharpened (&alpha;=10)</p>
+  </div>
+</div>
+
+<h4>Evaluation: sharpening a blurred sharp image</h4>
+<div class="image-grid-2x2">
+  <div class="image-box">
+    <img src="media/thai_original.jpg" alt="Original sharp Thai food image">
+    <p>Original (sharp)</p>
+  </div>
+  <div class="image-box">
+    <img src="media/thai_blurred.jpg" alt="Deliberately blurred image">
+    <p>Blurred</p>
+  </div>
+  <div class="image-box">
+    <img src="media/thai_resharpened.jpg" alt="Resharpened image, alpha=4">
+    <p>Resharpened (&alpha;=4)</p>
+  </div>
+</div>
+<p>
+  Sharpening a blurred image can recover a decent amount of the original edge contrast
+  that was lost to blurring, but it defintely does not live up to the original.
+  Fine details that were  removed by the blur can't' be recovered.
+  Instead, whatever edge information
+  survived the blur is remphasized.
+</p>
+
+<h3>Part 2.2: Hybrid Images</h3>
+
+<p>
+  A hybrid image combines the high frequencies of one image with the low
+  frequencies of another. Up close, the high-frequency image is clearer
+  and from a distance the low-frequency image is
+  clearer. The high-pass filter is computed as the original image minus a
+  Gaussian-blurred version of itself; the low-pass filter is just the
+  Gaussian blur. The two are then added together. Each image's cutoff is
+  controlled by its own Gaussian's <code>sigma</code>.
+</p>
+
+<h4>Derek + Nutmeg</h4>
+<div class="image-grid-2x2">
+  <div class="image-box">
+    <img src="media/derek_aligned.jpg" alt="Aligned Nutmeg image">
+    <p>Aligned input (high freq source)</p>
+  </div>
+  <div class="image-box">
+    <img src="media/nutmeg_aligned.jpg" alt="Aligned Derek image">
+    <p>Aligned input (low freq source)</p>
+  </div>
+  <div class="image-box">
+    <img src="media/high_pass_s1_6.jpg" alt="High-pass filtered Nutmeg">
+    <p>High-pass (&sigma;=6)</p>
+  </div>
+  <div class="image-box">
+    <img src="media/low_pass_s2_8.jpg" alt="Low-pass filtered Derek">
+    <p>Low-pass (&sigma;=8)</p>
+  </div>
+</div>
+
+<p>Fourier analysis of the process (log magnitude spectrum):</p>
+<img src="media/fft_analysis_s1_6_s2_8.png" alt="Fourier transform analysis of Derek/Nutmeg hybrid" width="900">
+<p>
+  The low-pass leaves nothing but a circle concentrated near the center. The high-pass 
+is the opposite; there's less energy near the center. I chose
+  <code>&sigma;1=6</code> for the high-pass and <code>&sigma;2=8</code> for the low-pass
+  after experimenting with a few values.
+</p>
+
+<p>Final hybrid result:</p>
+<center><img src="media/hybrid_s1_6_s2_8.jpg" alt="Derek and Nutmeg hybrid image" width="300"></center>
+
+<h4>Sario (Sam and Dario)</h4>
+<div class="image-grid-3x3">
+  <div class="image-box">
+    <img src="media/sam_aligned.jpg" alt="Aligned input image 1">
+    <p>Aligned input (high freq source)</p>
+  </div>
+  <div class="image-box">
+    <img src="media/dario_aligned.jpg" alt="Aligned input image 2">
+    <p>Aligned input (low freq source)</p>
+  </div>
+  <div class="image-box">
+    <img src="media/sario.jpg" alt="Sario hybrid">
+    <p>sario</p>
+  </div>
+</div>
+<!-- <p>Final hybrid result:</p>
+<img src="media/sario.jpg" alt="Hybrid image 2" width="500"> -->
+
+<h4>baby raniya and zaina and big raniya and zaina at lake scranton</h4>
+<div class="image-grid-3x3">
+  <div class="image-box">
+    <img src="media/rz1_aligned.jpg" alt="Aligned Zaina image">
+    <p>Aligned input (high freq source)</p>
+  </div>
+  <div class="image-box">
+    <img src="media/rz2_aligned.jpg" alt="Aligned Raniya image">
+    <p>Aligned input (low freq source)</p>
+  </div>
+  <div class="image-box">
+    <img src="media/rz_hybrid_s1_6_s2_8.jpg" alt="Zaina and Raniya hybrid image">
+    <p>hybrid</p>
+  </div>
+</div>
+<h2>Part 2: Gaussian and Laplacian Stacks, and Multiresolution Blending</h2>
+
+<h3>Part 2.3: Gaussian and Laplacian Stacks</h3>
+
+<p>
+  I built
+  the Gaussian stack by applying a Gaussian filter to the
+  last level's output, and the Laplacian stack by subtracting each pair
+  of consecutive Gaussian levels, and I kept the final, most-blurred Gaussian
+  level as the last Laplacian level. Each row below shows one level of the
+  process for the apple/orange oraple, with the apple's Laplacian band masked to
+  its region, the orange's Laplacian band masked to its region, and the two
+  combined.
+</p>
+
+<h4>Gaussian and Laplacian stacks: apple</h4>
+<div class="image-grid-3x3">
+  <div class="image-box"><img src="media/apple_g0.jpg" alt="Apple Gaussian level 0"><p>G0</p></div>
+  <div class="image-box"><img src="media/apple_g1.jpg" alt="Apple Gaussian level 1"><p>G1</p></div>
+  <div class="image-box"><img src="media/apple_g2.jpg" alt="Apple Gaussian level 2"><p>G2</p></div>
+  <div class="image-box"><img src="media/apple_g3.jpg" alt="Apple Gaussian level 3"><p>G3</p></div>
+  <div class="image-box"><img src="media/apple_g4.jpg" alt="Apple Gaussian level 4"><p>G4</p></div>
+  <div class="image-box"><img src="media/apple_g5.jpg" alt="Apple Gaussian level 5"><p>G5</p></div>
+</div>
+<div class="image-grid-3x3">
+  <div class="image-box"><img src="media/apple_l0.jpg" alt="Apple Laplacian level 0"><p>L0</p></div>
+  <div class="image-box"><img src="media/apple_l1.jpg" alt="Apple Laplacian level 1"><p>L1</p></div>
+  <div class="image-box"><img src="media/apple_l2.jpg" alt="Apple Laplacian level 2"><p>L2</p></div>
+  <div class="image-box"><img src="media/apple_l3.jpg" alt="Apple Laplacian level 3"><p>L3</p></div>
+  <div class="image-box"><img src="media/apple_l4.jpg" alt="Apple Laplacian level 4"><p>L4</p></div>
+  <div class="image-box"><img src="media/apple_l5.jpg" alt="Apple Laplacian level 5"><p>L5</p></div>
+</div>
+
+<h4>Gaussian and Laplacian stacks: orange</h4>
+<div class="image-grid-3x3">
+  <div class="image-box"><img src="media/orange_g0.jpg" alt="Orange Gaussian level 0"><p>G0</p></div>
+  <div class="image-box"><img src="media/orange_g1.jpg" alt="Orange Gaussian level 1"><p>G1</p></div>
+  <div class="image-box"><img src="media/orange_g2.jpg" alt="Orange Gaussian level 2"><p>G2</p></div>
+  <div class="image-box"><img src="media/orange_g3.jpg" alt="Orange Gaussian level 3"><p>G3</p></div>
+  <div class="image-box"><img src="media/orange_g4.jpg" alt="Orange Gaussian level 4"><p>G4</p></div>
+  <div class="image-box"><img src="media/orange_g5.jpg" alt="Orange Gaussian level 5"><p>G5</p></div>
+</div>
+<div class="image-grid-3x3">
+  <div class="image-box"><img src="media/orange_l0.jpg" alt="Orange Laplacian level 0"><p>L0</p></div>
+  <div class="image-box"><img src="media/orange_l1.jpg" alt="Orange Laplacian level 1"><p>L1</p></div>
+  <div class="image-box"><img src="media/orange_l2.jpg" alt="Orange Laplacian level 2"><p>L2</p></div>
+  <div class="image-box"><img src="media/orange_l3.jpg" alt="Orange Laplacian level 3"><p>L3</p></div>
+  <div class="image-box"><img src="media/orange_l4.jpg" alt="Orange Laplacian level 4"><p>L4</p></div>
+  <div class="image-box"><img src="media/orange_l5.jpg" alt="Orange Laplacian level 5"><p>L5</p></div>
+</div>
+
+
+
+<h3>Part 2.4: Multiresolution Blending (a.k.a. the oraple!)</h3>
+
+<p>
+  At each level, I take image A's Laplacian band and weigh it by that
+  level's blurred mask, then take image B's band and weigh it by one minus
+  the mask, and add the two together. Summing up all the levels collapses
+  everything back into the final blend. Since the mask gets blurrier the
+  deeper you go, low frequencies end up blended over a wide, soft seam
+  while high frequencies stay blended over a narrow, sharp one.
+</p>
+
+<h4>The oraple</h4>
+<div class="image-grid-2x2">
+  <div class="image-box"><img src="media/apple.jpeg" alt="Apple"><p>apple</p></div>
+  <div class="image-box"><img src="media/orange.jpeg" alt="Orange"><p>orange</p></div>
+  <div class="image-box"><img src="media/oraple_masked_input_A.jpg" alt="Masked apple"><p>masked input A</p></div>
+  <div class="image-box"><img src="media/oraple_blended_result.jpg" alt="Final oraple"><p>oraple!</p></div>
+</div>
+
+<h4>Recreation of Figure 3.42 (Szeliski)</h4>
+
+
+<div class="image-grid-3x3">
+  <div class="image-box"><img src="media/oraple_maskedA_level0.jpg" alt="Apple masked level 0"><p>(a) apple, level 0</p></div>
+  <div class="image-box"><img src="media/oraple_maskedB_level0.jpg" alt="Orange masked level 0"><p>(b) orange, level 0</p></div>
+  <div class="image-box"><img src="media/oraple_blended_level0.jpg" alt="Combined level 0"><p>(c) combined, level 0</p></div>
+  <div class="image-box"><img src="media/oraple_maskedA_level2.jpg" alt="Apple masked level 2"><p>(d) apple, level 2</p></div>
+  <div class="image-box"><img src="media/oraple_maskedB_level2.jpg" alt="Orange masked level 2"><p>(e) orange, level 2</p></div>
+  <div class="image-box"><img src="media/oraple_blended_level2.jpg" alt="Combined level 2"><p>(f) combined, level 2</p></div>
+  <div class="image-box"><img src="media/oraple_maskedA_level5.jpg" alt="Apple masked level 5"><p>(g) apple, level 5</p></div>
+  <div class="image-box"><img src="media/oraple_maskedB_level5.jpg" alt="Orange masked level 5"><p>(h) orange, level 5</p></div>
+  <div class="image-box"><img src="media/oraple_blended_level5.jpg" alt="Combined level 5"><p>(i) combined, level 5</p></div>
+  <div class="image-box"><img src="media/oraple_masked_input_A.jpg" alt="Apple collapsed"><p>(j) apple, collapsed</p></div>
+  <div class="image-box"><img src="media/oraple_masked_input_B.jpg" alt="Orange collapsed"><p>(k) orange, collapsed</p></div>
+  <div class="image-box"><img src="media/oraple_blended_result.jpg" alt="Combined collapsed"><p>(l) combined, collapsed</p></div>
+</div>
+
+<h4>double buttefly</h4>
+<div class="image-grid-3x3">
+  <div class="image-box"><img src="media/butt2.jpg" alt="First image"><p>image A</p></div>
+  <div class="image-box"><img src="media/butt3.jpg" alt="Second image"><p>image B</p></div>
+  <div class="image-box"><img src="media/butt_result.jpg" alt="Blended result"><p>blended result</p></div>
+</div>
+
+<h4>raniya at willard</h4>
+<p>
+  For the second custom blend, I used an irregular, person-shaped mask
+  instead of a straight-line seam to composite myself into Willard Park.
+</p>
+<div class="image-grid-2x2">
+  <div class="image-box"><img src="media/raniya.jpg" alt="Original photo of me"><p>me</p></div>
+  <div class="image-box"><img src="media/willard.jpg" alt="Willard Park" style="height: 280px; object-fit: cover; object-position: center;"><p>Willard Park</p></div>  <div class="image-box"><img src="media/rmask.jpg" alt="Irregularly masked subject"><p>irregular mask applied</p></div>
+  <div class="image-box"><img src="media/rwf.jpg" alt="Composited result"><p>me in Willard Park!</p></div>
+</div>
+
+<h2>What I Learned</h2>
+<p>
+  I was surpirsed by how much you can do with
+   such simple operations. Everything from sharpening to edge
+  detection to hybrid images were rooted in convolving an image with a Gaussian over and
+  over in different combinations. There's a lot you can do by just blurring, subtracting, and recombining at different
+  scales. 
+  
+  It was surprising to see how far something so simple can go. For example, 
+  knowing what aspects of an image a blur removes is enough knowledge to
+  sharpen an image or fuse two faces into one.
+</p>
+
+</body>
+</html>
