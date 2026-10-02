@@ -23,6 +23,7 @@ import img_berk from './assets/room/berk.webp'
 import img_self from './assets/room/self.webp'
 import img_chair from './assets/room/chair.webp'
 import img_shoes from './assets/room/climbingshoes.webp'
+import fun_climbing from './assets/fun/climbing.jpg'
 import img_table from './assets/room/table.webp'
 import img_orchid from './assets/room/orchid.webp'
 import img_laptop from './assets/room/laptop.webp'
@@ -58,7 +59,11 @@ export const items = [
   { id: 'berk', src: img_berk, x: 80.76, y: 11.11, w: 3.8, section: 'experiences', title: "berkeley", body: []  },
   { id: 'self', src: img_self, opens: 'about', x: 28.15, y: 19.66, w: 16.86, section: 'about', title: "about me", body: []  },
   { id: 'chair', src: img_chair, x: 57.84, y: 39.66, w: 26.37 },
-  { id: 'shoes', src: img_shoes, x: 46.5, y: 76.07, w: 12.0, section: 'fun', title: "climbing", body: []  },
+  { id: 'shoes', src: img_shoes, x: 46.5, y: 76.07, w: 12.0, section: 'fun', title: "climbing", body: [
+    "I've been getting into climbing lately, mostly bouldering. It's a physical activity with a clear goal that doesn't feel purely superficial.",
+    "I also fall a lot, which turns out to be good for me. It's hard to take yourself too seriously when you've just slid down a wall onto a giant foam mattress for the eighth time. And failure (more broadly) feels safer.",
+    "Eventually I'd like to try it outside on real rock, where the problems weren't set by anyone at all.",
+  ], photos: [fun_climbing] },
   { id: 'table', src: img_table, x: 78.86, y: 60.17, w: 16.86 },
   { id: 'orchid', src: img_orchid, x: 78.4, y: 39.5, w: 12.8, section: 'fun', title: "lego", body: []  },
   { id: 'laptop', src: img_laptop, x: 84.92, y: 58.63, w: 10.81, section: 'projects', title: "projects", body: []  },
@@ -68,7 +73,7 @@ export const items = [
     { label: 'email', href: 'mailto:raniyakhan@berkeley.edu' },
     { label: 'linkedin', href: 'https://www.linkedin.com/in/raniyakhan' },
     { label: 'github', href: 'https://github.com/raniyakhan' },
-    { label: 'beli', href: null }, // TODO: Raniya's beli profile link
+    { label: 'beli', href: 'https://beliapp.co/app/raniya' },
   ] },
 ]
 
