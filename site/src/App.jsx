@@ -36,7 +36,7 @@ function ItemNote({ item, onClose }) {
   // several photos/videos get a wider note and an even grid of tiles
   const media = (item.photos?.length ?? 0) + (item.videos?.length ?? 0)
   const grid = media > 1
-  const cls = item.concerts || item.scatter ? 'note gallery wide' : grid ? 'note gallery' : 'note'
+  const cls = item.concerts || item.scatter || item.story ? 'note gallery wide' : grid ? 'note gallery' : 'note'
   return (
     <Sheet onClose={onClose} className={cls} labelledBy="note-title">
       <p className="eyebrow">{SECTIONS[item.section]}</p>
@@ -46,7 +46,7 @@ function ItemNote({ item, onClose }) {
           <img src={item.book.cover} alt={`${item.book.title} cover`} />
           <figcaption><b>{item.book.title}</b><br />{item.book.author}</figcaption>
         </figure>
-      ) : item.body.length ? item.body.map((p, i) => <p key={i}>{p}</p>) : <Empty />}
+      ) : item.body.length ? item.body.map((p, i) => <p key={i}>{p}</p>) : !item.story && <Empty />}
       {item.photos && (
         <div className={grid ? 'tiles' : 'snaps'}>
           {item.photos.map((src, j) => <img key={j} className={grid ? 'tile' : 'snap tall'} src={src} alt={`${item.title} photo`} loading="lazy" />)}
@@ -55,6 +55,18 @@ function ItemNote({ item, onClose }) {
           ))}
         </div>
       )}
+      {item.story?.map((b, j) => {
+        if (b.row) {
+          return (
+            <div key={j} className={`photo-row${b.narrow ? ' narrow' : ''}`}>
+              {b.row.map((src, k) => <img key={k} src={src} alt={`${item.title} photo`} loading="lazy" />)}
+            </div>
+          )
+        }
+        if (!b.link) return <p key={j}>{b.p}</p>
+        const [before, after] = b.p.split(b.link.text)
+        return <p key={j}>{before}<a className="cta inline" href={b.link.href} target="_blank" rel="noreferrer">{b.link.text}</a>{after}</p>
+      })}
       {item.scatter && (
         <div className="scatter">
           {item.scatter.map((m, j) => (

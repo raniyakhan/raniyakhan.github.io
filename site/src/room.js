@@ -37,6 +37,12 @@ import emb_heart from './assets/likes/emboss-heart.webp'
 import emb_sybil from './assets/likes/emboss-sybil.jpg'
 import emb_tia from './assets/likes/emboss-tia.jpg'
 import emb_flower from './assets/likes/emboss-flower.jpg'
+import moma_rachaph from './assets/moma/rachaph.jpg'
+import moma_friend1 from './assets/moma/friend1.jpg'
+import moma_mama from './assets/moma/mama-and-me.jpg'
+import moma_friend2 from './assets/moma/friend2.jpg'
+import moma_side1 from './assets/moma/side1.jpg'
+import moma_side2 from './assets/moma/side2.jpg'
 import book_now from './assets/likes/story-of-a-new-name.jpg'
 import fun_climbing from './assets/fun/climbing.jpg'
 import fun_laser from './assets/fun/laser.jpg'
@@ -72,7 +78,16 @@ export const items = [
       { name: 'Coldplay', date: 'Jul 16, 2025', photo: mu_coldplay },
     ],
     article: { src: mu_dailycal, text: "The newspaper on my wall is The Daily Californian's article from when Lorde came to the Greek Theatre at Berkeley." } },
-  { id: 'welcome', src: img_welcome, x: 21.2, y: 10.43, w: 5.7, section: 'experiences', title: "moma", body: []  },
+  { id: 'welcome', src: img_welcome, x: 21.2, y: 10.43, w: 5.7, section: 'experiences', title: "moma", body: [],
+    // paragraphs and photo rows in order; photos show uncropped
+    story: [
+      { p: "Over the summer, my employee ID gave me free entry to the MoMA. I was there at least once a week." },
+      { p: "I became completely enamored with Self-Portrait_Rachaph by Minjeong An.", link: { text: 'Self-Portrait_Rachaph', href: 'https://www.moma.org/collection/works/482257' } },
+      { row: [moma_rachaph], narrow: true },
+      { p: "I got to show some friends and sketch while I was there too." },
+      { row: [moma_friend1, moma_mama, moma_friend2] },
+      { row: [moma_side1, moma_side2] },
+    ] },
   { id: 'plate', src: img_plate, x: 20.07, y: 18.29, w: 8.73, section: 'about', title: "pennsylvania", body: []  },
   { id: 'eye', src: img_eye, x: 29.04, y: 10.17, w: 5.76, section: 'likes', title: "eye painting", body: []  },
   { id: 'smallart', src: img_smallart, x: 36.64, y: 9.83, w: 3.33, section: 'likes', title: "little print", body: []  },
