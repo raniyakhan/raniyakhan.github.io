@@ -110,7 +110,7 @@ export const items = [
   { id: 'self', src: img_self, opens: 'about', x: 28.15, y: 19.66, w: 16.86, section: 'about', title: "about me", body: []  },
   { id: 'chair', src: img_chair, x: 57.84, y: 39.66, w: 26.37 },
   { id: 'shoes', src: img_shoes, x: 46.5, y: 76.07, w: 12.0, section: 'fun', title: "climbing", body: [
-    "I've been getting into climbing lately, mostly bouldering. It's a physical activity with a clear goal that doesn't feel purely superficial.",
+    "I've been getting into climbing lately, mostly bouldering.",
     "I fall a lot, which turns out to be good for me. It's hard to take yourself too seriously when you've just slid down a wall onto a giant foam mattress for the eighth time. And failure (more broadly) feels safer.",
     "Eventually I'd like to try it outside on real rock, where the problems weren't set by anyone at all.",
   ], photos: [fun_climbing] },
