@@ -73,7 +73,10 @@ function ExperiencesPage({ onClose }) {
             </div>
             {e.photos && (
               <div className="snaps">
-                {e.photos.map((src, j) => <img key={j} className="snap" src={src} alt={`${e.org} photo`} loading="lazy" />)}
+                {e.photos.map((src, j) => {
+                  const img = <img key={j} className="snap" src={src} alt={`${e.org} photo`} loading="lazy" />
+                  return e.link ? <a key={j} href={e.link} target="_blank" rel="noreferrer" className="snap-link">{img}</a> : img
+                })}
               </div>
             )}
           </li>

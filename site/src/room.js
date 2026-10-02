@@ -6,6 +6,7 @@ import blkGroup from './assets/exp/blk_group.webp'
 import amazon from './assets/exp/amazon.webp'
 import unicef from './assets/exp/unicef.webp'
 import unicef2 from './assets/exp/unicef_2.webp'
+import rtvc from './assets/exp/rtvc.webp'
 import img_rug from './assets/room/rug.webp'
 import img_newspaper from './assets/room/newspaper.webp'
 import img_welcome from './assets/room/welcome.webp'
@@ -84,7 +85,7 @@ export const aboutPage = {
 }
 
 // One entry per job, newest first.
-// `photos` are optional snapshots shown with the entry.
+// `photos` are optional snapshots shown with the entry; `link` makes them clickable.
 export const experiences = [
   {
     role: 'Research Intern', org: 'BlackRock AI Labs', when: 'Jun – Aug 2026', where: 'New York, NY',
@@ -99,6 +100,7 @@ export const experiences = [
   {
     role: 'Undergraduate Researcher', org: 'Berkeley AI Research, Speech Group', when: 'Oct 2024 – Oct 2025', where: 'Berkeley, CA',
     line: 'I co-authored RT-VC, a real-time voice conversion system, and worked on making articulatory speech synthesis faster and lighter.',
+    photos: [rtvc], link: 'https://arxiv.org/abs/2506.10289',
   },
   {
     role: 'Technical Project Manager', org: 'UNICEF', when: 'Sep 2024 – Jan 2025', where: 'Berkeley, CA',
