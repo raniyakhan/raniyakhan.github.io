@@ -43,6 +43,7 @@ import moma_mama from './assets/moma/mama-and-me.jpg'
 import moma_friend2 from './assets/moma/friend2.jpg'
 import moma_side1 from './assets/moma/side1.jpg'
 import moma_side2 from './assets/moma/side2.jpg'
+import zine_print from './assets/likes/zine-print.webp'
 import book_now from './assets/likes/story-of-a-new-name.jpg'
 import fun_climbing from './assets/fun/climbing.jpg'
 import fun_laser from './assets/fun/laser.jpg'
@@ -90,7 +91,11 @@ export const items = [
     ] },
   { id: 'plate', src: img_plate, x: 20.07, y: 18.29, w: 8.73, section: 'about', title: "pennsylvania", body: []  },
   { id: 'eye', src: img_eye, x: 29.04, y: 10.17, w: 5.76, section: 'likes', title: "eye painting", body: []  },
-  { id: 'smallart', src: img_smallart, x: 36.64, y: 9.83, w: 3.33, section: 'likes', title: "little print", body: []  },
+  { id: 'smallart', src: img_smallart, x: 36.64, y: 9.83, w: 3.33, section: 'likes', title: "little print", body: [],
+    hero: zine_print,
+    story: [
+      { p: "Cutout from a zine I picked up at Librairie Drawn & Quarterly in Montreal. Best book store I've ever been to by the way.", link: { text: 'Librairie Drawn & Quarterly', href: 'https://www.google.com/maps/search/?api=1&query=Librairie+Drawn+%26+Quarterly+Montreal' } },
+    ] },
   { id: 'heart', src: img_heart, x: 41.75, y: 13.25, w: 3.21, section: 'likes', title: "silver heart", body: ["I love gifting people metal-embossed items. Here's a few things I made:"], // scattered, uncropped; `cut` = transparent cutout, no photo border
     scatter: [{ src: emb_heart, cut: true }, { src: emb_sybil }, { src: emb_tia }, { src: emb_flower }] },
   { id: 'flowerprint', src: img_flowerprint, x: 45.78, y: 9.4, w: 2.55, section: 'likes', title: "flower print", body: []  },

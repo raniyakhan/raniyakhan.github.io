@@ -36,7 +36,7 @@ function ItemNote({ item, onClose }) {
   // several photos/videos get a wider note and an even grid of tiles
   const media = (item.photos?.length ?? 0) + (item.videos?.length ?? 0)
   const grid = media > 1
-  const cls = item.concerts || item.scatter || item.story ? 'note gallery wide' : grid ? 'note gallery' : 'note'
+  const cls = item.hero ? 'note' : item.concerts || item.scatter || item.story ? 'note gallery wide' : grid ? 'note gallery' : 'note'
   return (
     <Sheet onClose={onClose} className={cls} labelledBy="note-title">
       <p className="eyebrow">{SECTIONS[item.section]}</p>
@@ -55,6 +55,7 @@ function ItemNote({ item, onClose }) {
           ))}
         </div>
       )}
+      {item.hero && <img className="hero" src={item.hero} alt={item.title} />}
       {item.story?.map((b, j) => {
         if (b.row) {
           return (
