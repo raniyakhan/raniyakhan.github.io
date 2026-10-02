@@ -27,7 +27,12 @@ function ItemNote({ item, onClose }) {
     <Sheet onClose={onClose} labelledBy="note-title">
       <p className="eyebrow">{SECTIONS[item.section]}</p>
       <h2 id="note-title">{item.title}</h2>
-      {item.body.length ? item.body.map((p, i) => <p key={i}>{p}</p>) : <Empty />}
+      {item.book ? (
+        <figure className="book">
+          <img src={item.book.cover} alt={`${item.book.title} cover`} />
+          <figcaption><b>{item.book.title}</b><br />{item.book.author}</figcaption>
+        </figure>
+      ) : item.body.length ? item.body.map((p, i) => <p key={i}>{p}</p>) : <Empty />}
       {item.photos && (
         <div className="snaps">
           {item.photos.map((src, j) => <img key={j} className="snap tall" src={src} alt={`${item.title} photo`} loading="lazy" />)}
