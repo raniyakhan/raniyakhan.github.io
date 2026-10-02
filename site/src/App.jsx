@@ -23,8 +23,11 @@ function Sheet({ onClose, className = 'note', labelledBy, children }) {
 const Empty = () => <p className="placeholder">nothing written here yet.</p>
 
 function ItemNote({ item, onClose }) {
+  // several photos/videos get a wider note and an even grid of tiles
+  const media = (item.photos?.length ?? 0) + (item.videos?.length ?? 0)
+  const grid = media > 1
   return (
-    <Sheet onClose={onClose} labelledBy="note-title">
+    <Sheet onClose={onClose} className={grid ? 'note gallery' : 'note'} labelledBy="note-title">
       <p className="eyebrow">{SECTIONS[item.section]}</p>
       <h2 id="note-title">{item.title}</h2>
       {item.book ? (
@@ -34,9 +37,9 @@ function ItemNote({ item, onClose }) {
         </figure>
       ) : item.body.length ? item.body.map((p, i) => <p key={i}>{p}</p>) : <Empty />}
       {item.photos && (
-        <div className="snaps">
-          {item.photos.map((src, j) => <img key={j} className="snap tall" src={src} alt={`${item.title} photo`} loading="lazy" />)}
-          {item.videos?.map((src, j) => <video key={`v${j}`} className="snap tall" src={src} autoPlay muted loop playsInline aria-label={`${item.title} video`} />)}
+        <div className={grid ? 'tiles' : 'snaps'}>
+          {item.photos.map((src, j) => <img key={j} className={grid ? 'tile' : 'snap tall'} src={src} alt={`${item.title} photo`} loading="lazy" />)}
+          {item.videos?.map((src, j) => <video key={`v${j}`} className={grid ? 'tile' : 'snap tall'} src={src} autoPlay muted loop playsInline aria-label={`${item.title} video`} />)}
         </div>
       )}
       {item.link && (
