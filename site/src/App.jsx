@@ -113,7 +113,9 @@ export default function App() {
       </div>
 
       <footer>
-        <button className="link" onClick={(e) => show(items.find((it) => it.id === 'phone'), e.currentTarget)}>get in touch</button>
+        {items.find((it) => it.id === 'phone').links.map((l) =>
+          l.href ? <a key={l.label} href={l.href} target="_blank" rel="noreferrer">{l.label}</a> : <span key={l.label} className="soon">{l.label}</span>
+        )}
       </footer>
 
       {open === 'about' && <AboutPage onClose={hide} />}
