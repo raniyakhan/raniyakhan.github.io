@@ -76,7 +76,8 @@ export const items = [
   { id: 'plate', src: img_plate, x: 20.07, y: 18.29, w: 8.73, section: 'about', title: "pennsylvania", body: []  },
   { id: 'eye', src: img_eye, x: 29.04, y: 10.17, w: 5.76, section: 'likes', title: "eye painting", body: []  },
   { id: 'smallart', src: img_smallart, x: 36.64, y: 9.83, w: 3.33, section: 'likes', title: "little print", body: []  },
-  { id: 'heart', src: img_heart, x: 41.75, y: 13.25, w: 3.21, section: 'likes', title: "silver heart", body: ["I love gifting people metal-embossed items. Here's a few things I made:"], photos: [emb_heart, emb_sybil, emb_tia, emb_flower] },
+  { id: 'heart', src: img_heart, x: 41.75, y: 13.25, w: 3.21, section: 'likes', title: "silver heart", body: ["I love gifting people metal-embossed items. Here's a few things I made:"], // scattered, uncropped; `cut` = transparent cutout, no photo border
+    scatter: [{ src: emb_heart, cut: true }, { src: emb_sybil }, { src: emb_tia }, { src: emb_flower }] },
   { id: 'flowerprint', src: img_flowerprint, x: 45.78, y: 9.4, w: 2.55, section: 'likes', title: "flower print", body: []  },
   { id: 'sunset', src: img_sunset, x: 41.81, y: 21.03, w: 6.24, section: 'likes', title: "sunset painting", body: []  },
   { id: 'frame', src: img_frame, x: 50.83, y: 9.74, w: 9.38, section: 'about', title: "my people", body: []  },
