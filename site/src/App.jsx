@@ -22,21 +22,132 @@ function Sheet({ onClose, className = 'note', labelledBy, children }) {
 
 const Empty = () => <p className="placeholder">nothing written here yet.</p>
 
-function ItemNote({ item, onClose }) {
+const videoType = (src) => (src.startsWith('data:video/webm') || src.endsWith('.webm') ? 'video/webm' : 'video/mp4')
+
+function Clip({ srcs, label, className }) {
   return (
-    <Sheet onClose={onClose} labelledBy="note-title">
+    <video className={className} autoPlay muted loop playsInline aria-label={label}>
+      {srcs.map((src) => <source key={src} src={src} type={videoType(src)} />)}
+    </video>
+  )
+}
+
+function ItemNote({ item, onClose }) {
+  // several photos/videos get a wider note and an even grid of tiles
+  const media = (item.photos?.length ?? 0) + (item.videos?.length ?? 0)
+  const grid = media > 1
+  const cls = item.hero ? 'note' : item.concerts || item.scatter || item.story ? 'note gallery wide' : grid ? 'note gallery' : 'note'
+  return (
+    <Sheet onClose={onClose} className={cls} labelledBy="note-title">
       <p className="eyebrow">{SECTIONS[item.section]}</p>
       <h2 id="note-title">{item.title}</h2>
-      {item.body.length ? item.body.map((p, i) => <p key={i}>{p}</p>) : <Empty />}
+      {item.book ? (
+        <figure className="book">
+          <img src={item.book.cover} alt={`${item.book.title} cover`} />
+          <figcaption><b>{item.book.title}</b><br />{item.book.author}</figcaption>
+        </figure>
+      ) : item.body.length ? item.body.map((p, i) => <p key={i}>{p}</p>) : !item.story && <Empty />}
+      {item.photos && (
+        <div className={grid ? 'tiles' : 'snaps'}>
+          {item.photos.map((src, j) => <img key={j} className={grid ? 'tile' : 'snap tall'} src={src} alt={`${item.title} photo`} loading="lazy" />)}
+          {item.videos?.map((srcs, j) => (
+            <Clip key={`v${j}`} srcs={srcs} className={grid ? 'tile' : 'snap tall'} label={`${item.title} video`} />
+          ))}
+        </div>
+      )}
+      {item.hero && <img className="hero" src={item.hero} alt={item.title} />}
+      {item.story?.map((b, j) => {
+        if (b.row) {
+          return (
+            <div key={j} className={`photo-row${b.narrow ? ' narrow' : ''}`}>
+              {b.row.map((src, k) => <img key={k} src={src} alt={`${item.title} photo`} loading="lazy" />)}
+            </div>
+          )
+        }
+        if (!b.link) return <p key={j}>{b.p}</p>
+        const [before, after] = b.p.split(b.link.text)
+        return <p key={j}>{before}<a className="cta inline" href={b.link.href} target="_blank" rel="noreferrer">{b.link.text}</a>{after}</p>
+      })}
+      {item.scatter && (
+        <div className="scatter">
+          {item.scatter.map((m, j) => (
+            <img key={j} src={m.src} alt={`${item.title} photo ${j + 1}`} loading="lazy" draggable="false" className={`bit bit${j + 1}${m.cut ? ' cut' : ''}`} />
+          ))}
+        </div>
+      )}
+      {item.concerts && (
+        <div className="shows">
+          {item.concerts.map((c, j) => (
+            <figure key={j} className="show">
+              {c.video ? <Clip srcs={c.video} className="tile" label={`${c.name} video`} /> : <img className="tile" src={c.photo} alt={`${c.name} concert`} loading="lazy" />}
+              <figcaption><b>{c.name}</b><br />{c.date}</figcaption>
+            </figure>
+          ))}
+        </div>
+      )}
+      {item.article && (
+        <div className="article">
+          <img src={item.article.src} alt="The Daily Californian article about Lorde at the Greek Theatre" />
+          <p>{item.article.text}</p>
+        </div>
+      )}
+      {item.link && (
+        <p><a className="cta" href={item.link.href} target="_blank" rel="noreferrer">{item.link.label}</a></p>
+      )}
+      {item.links && (
+        <ul className="links">
+          {item.links.map((l) => (
+            <li key={l.label}>
+              {l.href ? <a className="cta" href={l.href} target="_blank" rel="noreferrer">{l.label}</a> : <span className="soon">{l.label}</span>}
+            </li>
+          ))}
+        </ul>
+      )}
     </Sheet>
   )
 }
 
+// A pile of photos; clicking sends the top one to the back.
+const TILTS = [-3, 4, -6, 2, 6, -2]
+
+function PhotoStack({ photos }) {
+  const [top, setTop] = useState(0)
+  const [leaving, setLeaving] = useState(false)
+  const next = () => {
+    if (leaving) return
+    setLeaving(true)
+    setTimeout(() => { setTop((t) => (t + 1) % photos.length); setLeaving(false) }, 320)
+  }
+  return (
+    <figure className="stack-wrap">
+      <button className="stack" onClick={next} aria-label={`Photo ${top + 1} of ${photos.length}, click for the next one`}>
+        {photos.map((src, i) => {
+          const depth = (i - top + photos.length) % photos.length
+          const out = depth === 0 && leaving
+          return (
+            <img
+              key={i}
+              src={src}
+              alt=""
+              draggable="false"
+              className={out ? 'out' : undefined}
+              style={{ zIndex: photos.length - depth, transform: `rotate(${TILTS[i % TILTS.length]}deg)` }}
+            />
+          )
+        })}
+      </button>
+      <figcaption>click through the stack</figcaption>
+    </figure>
+  )
+}
+
 function AboutPage({ onClose }) {
+  const [hello, ...rest] = aboutPage.body
   return (
     <Sheet onClose={onClose} className="note page" labelledBy="page-title">
       <h2 id="page-title">{aboutPage.title}</h2>
-      {aboutPage.body.length ? aboutPage.body.map((p, i) => <p key={i}>{p}</p>) : <Empty />}
+      {aboutPage.body.length ? <><p className="hello">{hello}</p>{rest.map((p, i) => <p key={i}>{p}</p>)}</> : <Empty />}
+      {aboutPage.photos?.length > 0 && <PhotoStack photos={aboutPage.photos} />}
     </Sheet>
   )
 }
@@ -56,7 +167,10 @@ function ExperiencesPage({ onClose }) {
             </div>
             {e.photos && (
               <div className="snaps">
-                {e.photos.map((src, j) => <img key={j} className="snap" src={src} alt={`${e.org} photo`} loading="lazy" />)}
+                {e.photos.map((src, j) => {
+                  const img = <img key={j} className="snap" src={src} alt={`${e.org} photo`} loading="lazy" />
+                  return e.link ? <a key={j} href={e.link} target="_blank" rel="noreferrer" className="snap-link">{img}</a> : img
+                })}
               </div>
             )}
           </li>
@@ -99,6 +213,12 @@ export default function App() {
           )
         })}
       </div>
+
+      <footer>
+        {items.find((it) => it.id === 'phone').links.map((l) =>
+          l.href ? <a key={l.label} href={l.href} target="_blank" rel="noreferrer">{l.label}</a> : <span key={l.label} className="soon">{l.label}</span>
+        )}
+      </footer>
 
       {open === 'about' && <AboutPage onClose={hide} />}
       {open === 'experiences' && <ExperiencesPage onClose={hide} />}
