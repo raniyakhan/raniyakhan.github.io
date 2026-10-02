@@ -31,6 +31,15 @@ function ItemNote({ item, onClose }) {
       {item.link && (
         <p><a className="cta" href={item.link.href} target="_blank" rel="noreferrer">{item.link.label} →</a></p>
       )}
+      {item.links && (
+        <ul className="links">
+          {item.links.map((l) => (
+            <li key={l.label}>
+              {l.href ? <a className="cta" href={l.href} target="_blank" rel="noreferrer">{l.label}</a> : <span className="soon">{l.label}</span>}
+            </li>
+          ))}
+        </ul>
+      )}
     </Sheet>
   )
 }
@@ -102,6 +111,10 @@ export default function App() {
           )
         })}
       </div>
+
+      <footer>
+        <button className="link" onClick={(e) => show(items.find((it) => it.id === 'phone'), e.currentTarget)}>get in touch</button>
+      </footer>
 
       {open === 'about' && <AboutPage onClose={hide} />}
       {open === 'experiences' && <ExperiencesPage onClose={hide} />}
