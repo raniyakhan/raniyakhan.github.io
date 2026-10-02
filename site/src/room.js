@@ -30,7 +30,6 @@ import mu_nemahsisMp4 from './assets/music/nemahsis.mp4'
 import mu_nemahsisWebm from './assets/music/nemahsis.webm'
 import mu_lordeMp4 from './assets/music/lorde.mp4'
 import mu_lordeWebm from './assets/music/lorde.webm'
-import mu_bf25 from './assets/music/between-friends-2025.jpg'
 import mu_coldplay from './assets/music/coldplay.jpg'
 import mu_dailycal from './assets/music/daily-cal-lorde.jpg'
 import book_now from './assets/likes/story-of-a-new-name.jpg'
@@ -66,7 +65,6 @@ export const items = [
       { name: 'Between Friends', date: 'Sep 4, 2026', video: [mu_bf26webm, mu_bf26mp4] },
       { name: 'Nemahsis', date: 'Apr 3, 2026', video: [mu_nemahsisWebm, mu_nemahsisMp4] },
       { name: 'Lorde', date: 'Oct 19, 2025', video: [mu_lordeWebm, mu_lordeMp4] },
-      { name: 'Between Friends', date: 'Sep 26, 2025', photo: mu_bf25 },
       { name: 'Coldplay', date: 'Jul 16, 2025', photo: mu_coldplay },
     ],
     article: { src: mu_dailycal, text: "The newspaper on my wall is The Daily Californian's article from when Lorde came to the Greek Theatre at Berkeley." } },
