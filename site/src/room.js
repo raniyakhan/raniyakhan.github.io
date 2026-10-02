@@ -85,7 +85,7 @@ export const items = [
       { p: "Over the summer, my employee ID gave me free entry to the MoMA. I was there at least once a week." },
       { p: "I became completely enamored with Self-Portrait_Rachaph by Minjeong An.", link: { text: 'Self-Portrait_Rachaph', href: 'https://www.moma.org/collection/works/482257' } },
       { row: [moma_rachaph], narrow: true },
-      { p: "I got to show some friends and sketch while I was there too." },
+      { p: "I got to show some friends around while I was there too." },
       { row: [moma_friend1, moma_mama, moma_friend2] },
       { row: [moma_side1, moma_side2] },
     ] },
