@@ -27,6 +27,7 @@ import img_shoes from './assets/room/climbingshoes.webp'
 import fun_climbing from './assets/fun/climbing.jpg'
 import fun_laser from './assets/fun/laser.jpg'
 import fun_laser3 from './assets/fun/laser3.jpg'
+import fun_laser4 from './assets/fun/laser4.jpg'
 import fun_laserVideo from './assets/fun/laser.mp4'
 import img_table from './assets/room/table.webp'
 import img_orchid from './assets/room/orchid.webp'
@@ -61,13 +62,13 @@ export const items = [
   { id: 'clock', src: img_clock, x: 64.13, y: 13.68, w: 8.91, section: 'about', title: "right now", body: []  },
   { id: 'door', src: img_door, x: 75.4, y: 16.1, w: 3.3, section: 'fun', title: "laser cutting", body: [
     "Laser cutting!! I very much enjoy watching shapes I've drawn on a screen come to life as real objects.",
-  ], photos: [fun_laser, fun_laser3], videos: [fun_laserVideo] },
+  ], photos: [fun_laser, fun_laser3, fun_laser4], videos: [fun_laserVideo] },
   { id: 'berk', src: img_berk, x: 80.76, y: 11.11, w: 3.8, section: 'experiences', title: "berkeley", body: []  },
   { id: 'self', src: img_self, opens: 'about', x: 28.15, y: 19.66, w: 16.86, section: 'about', title: "about me", body: []  },
   { id: 'chair', src: img_chair, x: 57.84, y: 39.66, w: 26.37 },
   { id: 'shoes', src: img_shoes, x: 46.5, y: 76.07, w: 12.0, section: 'fun', title: "climbing", body: [
     "I've been getting into climbing lately, mostly bouldering. It's a physical activity with a clear goal that doesn't feel purely superficial.",
-    "I also fall a lot, which turns out to be good for me. It's hard to take yourself too seriously when you've just slid down a wall onto a giant foam mattress for the eighth time. And failure (more broadly) feels safer.",
+    "I fall a lot, which turns out to be good for me. It's hard to take yourself too seriously when you've just slid down a wall onto a giant foam mattress for the eighth time. And failure (more broadly) feels safer.",
     "Eventually I'd like to try it outside on real rock, where the problems weren't set by anyone at all.",
   ], photos: [fun_climbing] },
   { id: 'table', src: img_table, x: 78.86, y: 60.17, w: 16.86 },
