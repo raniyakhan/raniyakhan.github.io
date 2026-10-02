@@ -29,6 +29,11 @@ import mu_nemahsisMp4 from './assets/music/nemahsis.mp4'
 import mu_lordeMp4 from './assets/music/lorde.mp4'
 import mu_coldplay from './assets/music/coldplay.jpg'
 import mu_dailycal from './assets/music/daily-cal-lorde.jpg'
+import me1 from './assets/about/me1.jpg'
+import me2 from './assets/about/me2.jpg'
+import me3 from './assets/about/me3.jpg'
+import me5 from './assets/about/me5.jpg'
+import me6 from './assets/about/me6.jpg'
 import book_now from './assets/likes/story-of-a-new-name.jpg'
 import fun_climbing from './assets/fun/climbing.jpg'
 import fun_laser from './assets/fun/laser.jpg'
@@ -101,7 +106,14 @@ export const items = [
 // The two full pages linked from the header.
 export const aboutPage = {
   title: 'about me',
-  body: [],
+  body: [
+    "Hi, I'm Raniya.",
+    "I'm currently a senior at UC Berkeley studying computer science and business. I've spent the last few years working in the applied AI space; I see myself as the bridge between what people need and what technology can do.",
+    "I want whatever I build to make a positive impact, and I'm especially passionate about education and web affordability. Lately I've also been dabbling in whimsical, joyful UX (hopefully this website is a good example!).",
+    "In my free time, you can find me crafting, climbing, or cooking :)",
+  ],
+  // the clickable photo stack at the bottom, top card first
+  photos: [me1, me2, me3, me5, me6],
 }
 
 // One entry per job, newest first.

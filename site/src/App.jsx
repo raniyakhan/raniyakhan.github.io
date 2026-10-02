@@ -87,11 +87,47 @@ function ItemNote({ item, onClose }) {
   )
 }
 
+// A pile of photos; clicking sends the top one to the back.
+const TILTS = [-3, 4, -6, 2, 6, -2]
+
+function PhotoStack({ photos }) {
+  const [top, setTop] = useState(0)
+  const [leaving, setLeaving] = useState(false)
+  const next = () => {
+    if (leaving) return
+    setLeaving(true)
+    setTimeout(() => { setTop((t) => (t + 1) % photos.length); setLeaving(false) }, 320)
+  }
+  return (
+    <figure className="stack-wrap">
+      <button className="stack" onClick={next} aria-label={`Photo ${top + 1} of ${photos.length}, click for the next one`}>
+        {photos.map((src, i) => {
+          const depth = (i - top + photos.length) % photos.length
+          const out = depth === 0 && leaving
+          return (
+            <img
+              key={i}
+              src={src}
+              alt=""
+              draggable="false"
+              className={out ? 'out' : undefined}
+              style={{ zIndex: photos.length - depth, transform: `rotate(${TILTS[i % TILTS.length]}deg)` }}
+            />
+          )
+        })}
+      </button>
+      <figcaption>click through the stack</figcaption>
+    </figure>
+  )
+}
+
 function AboutPage({ onClose }) {
+  const [hello, ...rest] = aboutPage.body
   return (
     <Sheet onClose={onClose} className="note page" labelledBy="page-title">
       <h2 id="page-title">{aboutPage.title}</h2>
-      {aboutPage.body.length ? aboutPage.body.map((p, i) => <p key={i}>{p}</p>) : <Empty />}
+      {aboutPage.body.length ? <><p className="hello">{hello}</p>{rest.map((p, i) => <p key={i}>{p}</p>)}</> : <Empty />}
+      {aboutPage.photos?.length > 0 && <PhotoStack photos={aboutPage.photos} />}
     </Sheet>
   )
 }
