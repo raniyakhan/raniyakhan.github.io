@@ -29,7 +29,8 @@ import fun_climbing from './assets/fun/climbing.jpg'
 import fun_laser from './assets/fun/laser.jpg'
 import fun_laser3 from './assets/fun/laser3.jpg'
 import fun_laser4 from './assets/fun/laser4.jpg'
-import fun_laserVideo from './assets/fun/laser.mp4'
+import fun_laserMp4 from './assets/fun/laser.mp4'
+import fun_laserWebm from './assets/fun/laser.webm'
 import img_table from './assets/room/table.webp'
 import img_orchid from './assets/room/orchid.webp'
 import img_laptop from './assets/room/laptop.webp'
@@ -63,7 +64,7 @@ export const items = [
   { id: 'clock', src: img_clock, x: 64.13, y: 13.68, w: 8.91, section: 'about', title: "right now", body: []  },
   { id: 'door', src: img_door, x: 75.4, y: 16.1, w: 3.3, section: 'fun', title: "laser cutting", body: [
     "Laser cutting!! I very much enjoy watching shapes I've drawn on a screen come to life as real objects.",
-  ], photos: [fun_laser, fun_laser3, fun_laser4], videos: [fun_laserVideo] },
+  ], photos: [fun_laser, fun_laser3, fun_laser4], videos: [[fun_laserWebm, fun_laserMp4]] },
   { id: 'berk', src: img_berk, x: 80.76, y: 11.11, w: 3.8, section: 'experiences', title: "berkeley", body: []  },
   { id: 'self', src: img_self, opens: 'about', x: 28.15, y: 19.66, w: 16.86, section: 'about', title: "about me", body: []  },
   { id: 'chair', src: img_chair, x: 57.84, y: 39.66, w: 26.37 },

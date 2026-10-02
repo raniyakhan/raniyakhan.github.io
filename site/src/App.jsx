@@ -39,7 +39,11 @@ function ItemNote({ item, onClose }) {
       {item.photos && (
         <div className={grid ? 'tiles' : 'snaps'}>
           {item.photos.map((src, j) => <img key={j} className={grid ? 'tile' : 'snap tall'} src={src} alt={`${item.title} photo`} loading="lazy" />)}
-          {item.videos?.map((src, j) => <video key={`v${j}`} className={grid ? 'tile' : 'snap tall'} src={src} autoPlay muted loop playsInline aria-label={`${item.title} video`} />)}
+          {item.videos?.map((srcs, j) => (
+            <video key={`v${j}`} className={grid ? 'tile' : 'snap tall'} autoPlay muted loop playsInline aria-label={`${item.title} video`}>
+              {srcs.map((src) => <source key={src} src={src} type={src.startsWith('data:video/webm') || src.endsWith('.webm') ? 'video/webm' : 'video/mp4'} />)}
+            </video>
+          ))}
         </div>
       )}
       {item.link && (
