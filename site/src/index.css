@@ -14,7 +14,7 @@ html, body { margin: 0; background: var(--paper); color: var(--ink); }
 body { font-family: var(--serif); font-style: italic; }
 button { font: inherit; color: inherit; }
 
-main { padding-inline: 16px; padding-block: 20px 40px; }
+main { padding-inline: 16px; padding-block: 16px 16px; }
 header { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
 h1 { font-weight: 400; font-size: clamp(28px, 4vw, 46px); margin: 0; letter-spacing: -0.01em; }
 .hint { font-size: 21px; color: var(--muted); }
@@ -23,7 +23,8 @@ nav { display: flex; align-items: baseline; gap: 22px; flex-wrap: wrap; }
 .link:hover { color: var(--pen); }
 .link:focus-visible { outline: 2px solid var(--pen); outline-offset: 3px; }
 
-.room { position: relative; max-width: 1400px; margin: 0 auto; container-type: inline-size; }
+.room { position: relative; width: min(100%, 1400px, calc((100vh - 110px) * 1684 / 1170)); margin: 12px auto 0; container-type: inline-size; }
+@supports (height: 100svh) { .room { width: min(100%, 1400px, calc((100svh - 110px) * 1684 / 1170)); } }
 .thing { position: absolute; display: block; padding: 0; border: 0; background: none; }
 .thing img, img.thing { display: block; width: 100%; height: auto; user-select: none; }
 img.decor { pointer-events: none; }
