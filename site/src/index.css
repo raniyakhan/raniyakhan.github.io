@@ -83,14 +83,14 @@ button.thing:hover .cap, button.thing:focus-visible .cap { opacity: 1; }
 .stack:focus-visible { outline: 2px solid var(--pen); outline-offset: 6px; }
 .stack-wrap figcaption { margin-top: 14px; color: var(--muted); font-size: 14px; font-style: italic; }
 @media (prefers-reduced-motion: reduce) { .stack img { transition: none; } }
-.scatter { position: relative; height: 470px; margin-top: 12px; }
+.scatter { position: relative; height: 460px; margin-top: 12px; }
 .bit { position: absolute; height: auto; background: #fff; padding: 6px; box-shadow: 0 6px 16px rgba(35, 32, 29, 0.2); transition: transform 0.25s cubic-bezier(0.3, 1.6, 0.5, 1); }
 .bit.cut { background: none; padding: 0; box-shadow: none; filter: drop-shadow(0 6px 10px rgba(35, 32, 29, 0.25)); }
 .bit:hover { z-index: 5; transform: rotate(0deg) scale(1.06) !important; }
-.bit1 { left: 62%; top: 44%; width: 30%; transform: rotate(9deg); z-index: 4; }
-.bit2 { left: 4%; top: 0; width: 31%; transform: rotate(-5deg); z-index: 1; }
-.bit3 { left: 35%; top: 4%; width: 29%; transform: rotate(4deg); z-index: 2; }
-.bit4 { left: 22%; top: 47%; width: 33%; transform: rotate(-3deg); z-index: 3; }
+.bit1 { left: 37%; top: 3%; width: 26%; transform: rotate(-6deg); z-index: 3; }
+.bit2 { left: 2%; top: 6%; width: 31%; transform: rotate(-4deg); z-index: 1; }
+.bit3 { left: 67%; top: 0; width: 30%; transform: rotate(5deg); z-index: 2; }
+.bit4 { left: 33%; top: 45%; width: 33%; transform: rotate(3deg); z-index: 4; }
 @media (max-width: 560px) { .scatter { height: 360px; } }
 .cta { display: inline-block; margin-top: 6px; color: var(--pen); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
 .cta:hover { color: var(--ink); }
