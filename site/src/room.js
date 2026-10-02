@@ -25,11 +25,8 @@ import img_self from './assets/room/self.webp'
 import img_chair from './assets/room/chair.webp'
 import img_shoes from './assets/room/climbingshoes.webp'
 import mu_bf26mp4 from './assets/music/between-friends-2026.mp4'
-import mu_bf26webm from './assets/music/between-friends-2026.webm'
 import mu_nemahsisMp4 from './assets/music/nemahsis.mp4'
-import mu_nemahsisWebm from './assets/music/nemahsis.webm'
 import mu_lordeMp4 from './assets/music/lorde.mp4'
-import mu_lordeWebm from './assets/music/lorde.webm'
 import mu_coldplay from './assets/music/coldplay.jpg'
 import mu_dailycal from './assets/music/daily-cal-lorde.jpg'
 import book_now from './assets/likes/story-of-a-new-name.jpg'
@@ -38,7 +35,6 @@ import fun_laser from './assets/fun/laser.jpg'
 import fun_laser3 from './assets/fun/laser3.jpg'
 import fun_laser4 from './assets/fun/laser4.jpg'
 import fun_laserMp4 from './assets/fun/laser.mp4'
-import fun_laserWebm from './assets/fun/laser.webm'
 import img_table from './assets/room/table.webp'
 import img_orchid from './assets/room/orchid.webp'
 import img_laptop from './assets/room/laptop.webp'
@@ -60,11 +56,11 @@ export const ROOM_ASPECT = 1684 / 1170
 export const items = [
   { id: 'rug', src: img_rug, x: 3.3, y: 65.8, w: 95 },
   { id: 'newspaper', src: img_newspaper, x: 9.26, y: 10.43, w: 8.49, section: 'likes', title: "live music", body: ["I love live music! A selection of recent concerts I've been to:"],
-    // dates come from each file's metadata (newest first); `video` is [webm, mp4]
+    // dates come from each file's metadata (newest first); `video` lists its sources
     concerts: [
-      { name: 'Between Friends', date: 'Sep 4, 2026', video: [mu_bf26webm, mu_bf26mp4] },
-      { name: 'Nemahsis', date: 'Apr 3, 2026', video: [mu_nemahsisWebm, mu_nemahsisMp4] },
-      { name: 'Lorde', date: 'Oct 19, 2025', video: [mu_lordeWebm, mu_lordeMp4] },
+      { name: 'Between Friends', date: 'Sep 4, 2026', video: [mu_bf26mp4] },
+      { name: 'Nemahsis', date: 'Apr 3, 2026', video: [mu_nemahsisMp4] },
+      { name: 'Lorde', date: 'Oct 19, 2025', video: [mu_lordeMp4] },
       { name: 'Coldplay', date: 'Jul 16, 2025', photo: mu_coldplay },
     ],
     article: { src: mu_dailycal, text: "The newspaper on my wall is The Daily Californian's article from when Lorde came to the Greek Theatre at Berkeley." } },
@@ -80,7 +76,7 @@ export const items = [
   { id: 'clock', src: img_clock, x: 64.13, y: 13.68, w: 8.91, section: 'about', title: "right now", body: []  },
   { id: 'door', src: img_door, x: 75.4, y: 16.1, w: 3.3, section: 'fun', title: "laser cutting", body: [
     "Laser cutting!! I very much enjoy watching shapes I've drawn on a screen come to life as real objects.",
-  ], photos: [fun_laser, fun_laser3, fun_laser4], videos: [[fun_laserWebm, fun_laserMp4]] },
+  ], photos: [fun_laser, fun_laser3, fun_laser4], videos: [[fun_laserMp4]] },
   { id: 'berk', src: img_berk, x: 80.76, y: 11.11, w: 3.8, section: 'experiences', title: "berkeley", body: []  },
   { id: 'self', src: img_self, opens: 'about', x: 28.15, y: 19.66, w: 16.86, section: 'about', title: "about me", body: []  },
   { id: 'chair', src: img_chair, x: 57.84, y: 39.66, w: 26.37 },
