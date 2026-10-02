@@ -32,7 +32,6 @@ import mu_dailycal from './assets/music/daily-cal-lorde.jpg'
 import me1 from './assets/about/me1.jpg'
 import me2 from './assets/about/me2.jpg'
 import me3 from './assets/about/me3.jpg'
-import me5 from './assets/about/me5.jpg'
 import me6 from './assets/about/me6.jpg'
 import book_now from './assets/likes/story-of-a-new-name.jpg'
 import fun_climbing from './assets/fun/climbing.jpg'
@@ -113,7 +112,7 @@ export const aboutPage = {
     "In my free time, you can find me crafting, climbing, or cooking :)",
   ],
   // the clickable photo stack at the bottom, top card first
-  photos: [me1, me2, me3, me5, me6],
+  photos: [me1, me2, me3, me6],
 }
 
 // One entry per job, newest first.
