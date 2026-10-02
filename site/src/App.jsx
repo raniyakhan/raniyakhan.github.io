@@ -35,7 +35,7 @@ function ItemNote({ item, onClose }) {
         </div>
       )}
       {item.link && (
-        <p><a className="cta" href={item.link.href} target="_blank" rel="noreferrer">{item.link.label} →</a></p>
+        <p><a className="cta" href={item.link.href} target="_blank" rel="noreferrer">{item.link.label}</a></p>
       )}
       {item.links && (
         <ul className="links">
