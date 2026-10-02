@@ -69,7 +69,7 @@ function ItemNote({ item, onClose }) {
         return <p key={j}>{before}<a className="cta inline" href={b.link.href} target="_blank" rel="noreferrer">{b.link.text}</a>{after}</p>
       })}
       {item.scatter && (
-        <div className="scatter">
+        <div className={`scatter ${item.scatterKind || ''}`}>
           {item.scatter.map((m, j) => (
             <img key={j} src={m.src} alt={`${item.title} photo ${j + 1}`} loading="lazy" draggable="false" className={`bit bit${j + 1}${m.cut ? ' cut' : ''}`} />
           ))}

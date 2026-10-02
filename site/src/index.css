@@ -91,7 +91,14 @@ button.thing:hover .cap, button.thing:focus-visible .cap { opacity: 1; }
 .bit2 { left: 2%; top: 6%; width: 31%; transform: rotate(-4deg); z-index: 1; }
 .bit3 { left: 67%; top: 0; width: 30%; transform: rotate(5deg); z-index: 2; }
 .bit4 { left: 33%; top: 45%; width: 33%; transform: rotate(3deg); z-index: 4; }
-@media (max-width: 560px) { .scatter { height: 360px; } }
+/* five-photo scatter (lino stamps) */
+.scatter.s5 { height: 480px; }
+.s5 .bit1 { left: 1%; top: 2%; width: 25%; transform: rotate(-5deg); z-index: 2; }
+.s5 .bit2 { left: 29%; top: 0; width: 40%; transform: rotate(2deg); z-index: 1; }
+.s5 .bit3 { left: 71%; top: 4%; width: 28%; transform: rotate(6deg); z-index: 3; }
+.s5 .bit4 { left: 12%; top: 37%; width: 27%; transform: rotate(4deg); z-index: 4; }
+.s5 .bit5 { left: 45%; top: 39%; width: 35%; transform: rotate(-4deg); z-index: 4; }
+@media (max-width: 560px) { .scatter { height: 360px; } .scatter.s5 { height: 270px; } }
 .photo-row { display: flex; gap: 12px; margin: 12px 0 16px; }
 .photo-row img { flex: 1 1 0; min-width: 0; height: auto; box-shadow: 0 4px 12px rgba(35, 32, 29, 0.16); }
 .photo-row.narrow { justify-content: center; }

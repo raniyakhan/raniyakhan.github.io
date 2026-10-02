@@ -43,6 +43,11 @@ import moma_mama from './assets/moma/mama-and-me.jpg'
 import moma_friend2 from './assets/moma/friend2.jpg'
 import moma_side1 from './assets/moma/side1.jpg'
 import moma_side2 from './assets/moma/side2.jpg'
+import lino1 from './assets/likes/lino1.jpg'
+import lino2 from './assets/likes/lino2.jpg'
+import lino3 from './assets/likes/lino3.jpg'
+import lino4 from './assets/likes/lino4.jpg'
+import lino5 from './assets/likes/lino5.jpg'
 import zine_print from './assets/likes/zine-print.webp'
 import book_now from './assets/likes/story-of-a-new-name.jpg'
 import fun_climbing from './assets/fun/climbing.jpg'
@@ -98,7 +103,8 @@ export const items = [
     ] },
   { id: 'heart', src: img_heart, x: 41.75, y: 13.25, w: 3.21, section: 'likes', title: "silver heart", body: ["I love gifting people metal-embossed items. Here's a few things I made:"], // scattered, uncropped; `cut` = transparent cutout, no photo border
     scatter: [{ src: emb_heart, cut: true }, { src: emb_sybil }, { src: emb_tia }, { src: emb_flower }] },
-  { id: 'flowerprint', src: img_flowerprint, x: 45.78, y: 9.4, w: 2.55, section: 'likes', title: "flower print", body: []  },
+  { id: 'flowerprint', src: img_flowerprint, x: 45.78, y: 9.4, w: 2.55, section: 'likes', title: "flower print", body: ["Lino cutting is fun! Some stamps I've made:"],
+    scatter: [{ src: lino2 }, { src: lino3 }, { src: lino4 }, { src: lino1 }, { src: lino5 }], scatterKind: 's5' },
   { id: 'sunset', src: img_sunset, x: 41.81, y: 21.03, w: 6.24, section: 'likes', title: "sunset painting", body: []  },
   { id: 'frame', src: img_frame, x: 50.83, y: 9.74, w: 9.38, section: 'about', title: "my people", body: []  },
   { id: 'mama', src: img_mama, x: 61.88, y: 8.89, w: 3.09, section: 'about', title: "mama", body: []  },
