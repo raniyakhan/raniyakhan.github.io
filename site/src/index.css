@@ -64,10 +64,9 @@ button.thing:hover .cap, button.thing:focus-visible .cap { opacity: 1; }
 .book { margin: 14px 0 4px; text-align: center; }
 .book img { display: block; width: 190px; height: auto; margin: 0 auto; border: 1px solid rgba(35, 32, 29, 0.25); box-shadow: 4px 6px 0 rgba(35, 32, 29, 0.12), 0 10px 22px rgba(35, 32, 29, 0.18); }
 .book figcaption { margin-top: 14px; font-size: 16px; line-height: 1.4; }
-.note.gallery { width: min(760px, 100%); }
-.tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 14px; }
+.note.gallery { width: min(560px, 100%); }
+.tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 14px; }
 .tile { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
-@media (max-width: 560px) { .tiles { grid-template-columns: repeat(2, 1fr); } }
 .cta { display: inline-block; margin-top: 6px; color: var(--pen); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
 .cta:hover { color: var(--ink); }
 .cta:focus-visible { outline: 2px solid var(--pen); outline-offset: 3px; }
