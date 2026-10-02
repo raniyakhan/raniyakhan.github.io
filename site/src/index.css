@@ -1,0 +1,59 @@
+/* Layout: the whole page is one room of cutouts on blank paper; every object is a link. */
+:root {
+  --paper: #ffffff;
+  --ink: #23201d;
+  --muted: #8f877e;
+  --pen: #b4312a;
+  --note: #fffdf7;
+  --tape: rgba(232, 196, 120, 0.55);
+  --serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--paper); color: var(--ink); }
+body { font-family: var(--serif); font-style: italic; }
+button { font: inherit; color: inherit; }
+
+main { padding-inline: 16px; padding-block: 20px 40px; }
+header { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+h1 { font-weight: 400; font-size: clamp(28px, 4vw, 46px); margin: 0; letter-spacing: -0.01em; }
+.hint { font-size: 21px; color: var(--muted); }
+nav { display: flex; align-items: baseline; gap: 22px; flex-wrap: wrap; }
+.link { border: 0; background: none; padding: 0; font-size: 23px; cursor: pointer; text-decoration: underline; text-decoration-color: var(--pen); text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.link:hover { color: var(--pen); }
+.link:focus-visible { outline: 2px solid var(--pen); outline-offset: 3px; }
+
+.room { position: relative; max-width: 1400px; margin: 0 auto; container-type: inline-size; }
+.thing { position: absolute; display: block; padding: 0; border: 0; background: none; }
+.thing img, img.thing { display: block; width: 100%; height: auto; user-select: none; }
+img.decor { pointer-events: none; }
+button.thing { cursor: pointer; transition: transform 0.25s cubic-bezier(0.3, 1.6, 0.5, 1), filter 0.25s; }
+button.thing img { pointer-events: none; }
+button.thing:hover, button.thing:focus-visible { transform: translateY(-2%) rotate(-1.5deg) scale(1.04); filter: drop-shadow(0 8px 12px rgba(35, 32, 29, 0.25)); outline: none; z-index: 999 !important; }
+
+.cap { position: absolute; left: 50%; bottom: 100%; transform: translate(-50%, -4px); white-space: nowrap; font-size: clamp(14px, 1.8cqi, 26px); color: var(--pen); background: var(--paper); padding: 0 0.35em; opacity: 0; pointer-events: none; transition: opacity 0.15s; }
+button.thing:hover .cap, button.thing:focus-visible .cap { opacity: 1; }
+
+.veil { position: fixed; inset: 0; z-index: 2000; display: grid; place-items: center; padding: 16px; background: rgba(35, 32, 29, 0.2); }
+.note { position: relative; width: min(500px, 100%); max-height: 88vh; overflow: auto; padding: 34px 32px 28px; background: var(--note); box-shadow: 0 18px 40px rgba(35, 32, 29, 0.25); transform: rotate(-1deg); animation: drop 0.35s cubic-bezier(0.3, 1.5, 0.5, 1); }
+.note::before { content: ''; position: absolute; top: -12px; left: 50%; width: 110px; height: 26px; transform: translateX(-50%) rotate(2deg); background: var(--tape); }
+.eyebrow { margin: 0; color: var(--pen); font-size: 19px; }
+.note h2 { margin: 0 0 12px; font-weight: 400; font-size: 36px; line-height: 1.05; text-wrap: balance; }
+.note p { font-size: 19px; line-height: 1.45; margin: 0 0 10px; }
+.note .placeholder { color: var(--muted); }
+.note.page { width: min(680px, 100%); transform: rotate(-0.5deg); padding: 40px 44px 34px; }
+.note.page h2 { font-size: 44px; margin-bottom: 18px; }
+.exp { list-style: none; margin: 0; padding: 0; display: grid; gap: 30px; text-align: center; }
+.exp p { margin: 0 0 4px; }
+.exp-head { font-size: 23px !important; }
+.exp-role { color: var(--pen); }
+.exp-meta { color: var(--muted); font-size: 17px !important; }
+.note.page.wide { width: min(760px, 100%); }
+.note.page.wide h2 { text-align: center; }
+.exp-text { min-width: 0; }
+.snaps { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 10px; }
+.snap { height: 170px; width: auto; max-width: 100%; object-fit: cover; }
+.close { position: absolute; top: 10px; right: 14px; border: 0; background: none; font-size: 20px; color: var(--muted); cursor: pointer; }
+.close:focus-visible { outline: 2px solid var(--pen); outline-offset: 2px; }
+@keyframes drop { from { transform: translateY(-14px) rotate(-4deg); opacity: 0.4; } }
+@media (prefers-reduced-motion: reduce) { button.thing, .note, .cap { transition: none; animation: none; } }
