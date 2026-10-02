@@ -94,7 +94,7 @@ export const items = [
   { id: 'smallart', src: img_smallart, x: 36.64, y: 9.83, w: 3.33, section: 'likes', title: "little print", body: [],
     hero: zine_print,
     story: [
-      { p: "Cutout from a zine I picked up at Librairie Drawn & Quarterly in Montreal. Best book store I've ever been to by the way.", link: { text: 'Librairie Drawn & Quarterly', href: 'https://www.google.com/maps/search/?api=1&query=Librairie+Drawn+%26+Quarterly+Montreal' } },
+      { p: "Cutout from a zine I picked up at Librairie Drawn & Quarterly in Montreal. Days at the Morisaki Bookshop from the book stack on the floor is also from there. Best book store I've ever been to. I can't explain it but there was something special in the air there.", link: { text: 'Librairie Drawn & Quarterly', href: 'https://www.google.com/maps/search/?api=1&query=Librairie+Drawn+%26+Quarterly+Montreal' } },
     ] },
   { id: 'heart', src: img_heart, x: 41.75, y: 13.25, w: 3.21, section: 'likes', title: "silver heart", body: ["I love gifting people metal-embossed items. Here's a few things I made:"], // scattered, uncropped; `cut` = transparent cutout, no photo border
     scatter: [{ src: emb_heart, cut: true }, { src: emb_sybil }, { src: emb_tia }, { src: emb_flower }] },
