@@ -31,6 +31,7 @@ function ItemNote({ item, onClose }) {
       {item.photos && (
         <div className="snaps">
           {item.photos.map((src, j) => <img key={j} className="snap tall" src={src} alt={`${item.title} photo`} loading="lazy" />)}
+          {item.videos?.map((src, j) => <video key={`v${j}`} className="snap tall" src={src} autoPlay muted loop playsInline aria-label={`${item.title} video`} />)}
         </div>
       )}
       {item.link && (
