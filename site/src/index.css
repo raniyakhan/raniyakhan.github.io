@@ -54,6 +54,9 @@ button.thing:hover .cap, button.thing:focus-visible .cap { opacity: 1; }
 .exp-text { min-width: 0; }
 .snaps { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 10px; }
 .snap { height: 170px; width: auto; max-width: 100%; object-fit: cover; }
+.cta { display: inline-block; margin-top: 6px; color: var(--pen); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.cta:hover { color: var(--ink); }
+.cta:focus-visible { outline: 2px solid var(--pen); outline-offset: 3px; }
 .close { position: absolute; top: 10px; right: 14px; border: 0; background: none; font-size: 20px; color: var(--muted); cursor: pointer; }
 .close:focus-visible { outline: 2px solid var(--pen); outline-offset: 2px; }
 @keyframes drop { from { transform: translateY(-14px) rotate(-4deg); opacity: 0.4; } }

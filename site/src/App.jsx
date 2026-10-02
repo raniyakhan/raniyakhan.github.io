@@ -28,6 +28,9 @@ function ItemNote({ item, onClose }) {
       <p className="eyebrow">{SECTIONS[item.section]}</p>
       <h2 id="note-title">{item.title}</h2>
       {item.body.length ? item.body.map((p, i) => <p key={i}>{p}</p>) : <Empty />}
+      {item.link && (
+        <p><a className="cta" href={item.link.href} target="_blank" rel="noreferrer">{item.link.label} →</a></p>
+      )}
     </Sheet>
   )
 }

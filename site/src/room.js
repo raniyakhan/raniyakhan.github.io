@@ -63,7 +63,7 @@ export const items = [
   { id: 'orchid', src: img_orchid, x: 78.4, y: 39.5, w: 12.8, section: 'fun', title: "lego", body: []  },
   { id: 'laptop', src: img_laptop, x: 84.92, y: 58.63, w: 10.81, section: 'projects', title: "projects", body: []  },
   { id: 'books', src: img_books, x: 15.08, y: 69.06, w: 11.4, section: 'likes', title: "books", body: []  },
-  { id: 'coffee', src: img_coffee, x: 17.1, y: 62.39, w: 4.87, section: 'likes', title: "coffee", body: []  },
+  { id: 'coffee', src: img_coffee, x: 17.1, y: 62.39, w: 4.87, section: 'contact', title: "let's hang out", body: ["Always happy to chat about new opportunities or whatever you're excited about!"], link: { href: 'https://calendly.com/raniyakhan-berkeley/coffee-chat', label: 'grab a coffee chat' }  },
   { id: 'phone', src: img_phone, x: 7.84, y: 78.29, w: 9.86, section: 'contact', title: "say hi", body: []  },
 ]
 
