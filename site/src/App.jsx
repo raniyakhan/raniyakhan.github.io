@@ -22,12 +22,23 @@ function Sheet({ onClose, className = 'note', labelledBy, children }) {
 
 const Empty = () => <p className="placeholder">nothing written here yet.</p>
 
+const videoType = (src) => (src.startsWith('data:video/webm') || src.endsWith('.webm') ? 'video/webm' : 'video/mp4')
+
+function Clip({ srcs, label, className }) {
+  return (
+    <video className={className} autoPlay muted loop playsInline aria-label={label}>
+      {srcs.map((src) => <source key={src} src={src} type={videoType(src)} />)}
+    </video>
+  )
+}
+
 function ItemNote({ item, onClose }) {
   // several photos/videos get a wider note and an even grid of tiles
   const media = (item.photos?.length ?? 0) + (item.videos?.length ?? 0)
   const grid = media > 1
+  const cls = item.concerts ? 'note gallery wide' : grid ? 'note gallery' : 'note'
   return (
-    <Sheet onClose={onClose} className={grid ? 'note gallery' : 'note'} labelledBy="note-title">
+    <Sheet onClose={onClose} className={cls} labelledBy="note-title">
       <p className="eyebrow">{SECTIONS[item.section]}</p>
       <h2 id="note-title">{item.title}</h2>
       {item.book ? (
@@ -40,10 +51,24 @@ function ItemNote({ item, onClose }) {
         <div className={grid ? 'tiles' : 'snaps'}>
           {item.photos.map((src, j) => <img key={j} className={grid ? 'tile' : 'snap tall'} src={src} alt={`${item.title} photo`} loading="lazy" />)}
           {item.videos?.map((srcs, j) => (
-            <video key={`v${j}`} className={grid ? 'tile' : 'snap tall'} autoPlay muted loop playsInline aria-label={`${item.title} video`}>
-              {srcs.map((src) => <source key={src} src={src} type={src.startsWith('data:video/webm') || src.endsWith('.webm') ? 'video/webm' : 'video/mp4'} />)}
-            </video>
+            <Clip key={`v${j}`} srcs={srcs} className={grid ? 'tile' : 'snap tall'} label={`${item.title} video`} />
           ))}
+        </div>
+      )}
+      {item.concerts && (
+        <div className="shows">
+          {item.concerts.map((c, j) => (
+            <figure key={j} className="show">
+              {c.video ? <Clip srcs={c.video} className="tile" label={`${c.name} video`} /> : <img className="tile" src={c.photo} alt={`${c.name} concert`} loading="lazy" />}
+              <figcaption><b>{c.name}</b><br />{c.date}</figcaption>
+            </figure>
+          ))}
+        </div>
+      )}
+      {item.article && (
+        <div className="article">
+          <img src={item.article.src} alt="The Daily Californian article about Lorde at the Greek Theatre" />
+          <p>{item.article.text}</p>
         </div>
       )}
       {item.link && (

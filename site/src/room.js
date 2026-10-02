@@ -24,6 +24,15 @@ import img_berk from './assets/room/berk.webp'
 import img_self from './assets/room/self.webp'
 import img_chair from './assets/room/chair.webp'
 import img_shoes from './assets/room/climbingshoes.webp'
+import mu_bf26mp4 from './assets/music/between-friends-2026.mp4'
+import mu_bf26webm from './assets/music/between-friends-2026.webm'
+import mu_nemahsisMp4 from './assets/music/nemahsis.mp4'
+import mu_nemahsisWebm from './assets/music/nemahsis.webm'
+import mu_lordeMp4 from './assets/music/lorde.mp4'
+import mu_lordeWebm from './assets/music/lorde.webm'
+import mu_bf25 from './assets/music/between-friends-2025.jpg'
+import mu_coldplay from './assets/music/coldplay.jpg'
+import mu_dailycal from './assets/music/daily-cal-lorde.jpg'
 import book_now from './assets/likes/story-of-a-new-name.jpg'
 import fun_climbing from './assets/fun/climbing.jpg'
 import fun_laser from './assets/fun/laser.jpg'
@@ -51,7 +60,16 @@ export const ROOM_ASPECT = 1684 / 1170
 
 export const items = [
   { id: 'rug', src: img_rug, x: 3.3, y: 65.8, w: 95 },
-  { id: 'newspaper', src: img_newspaper, x: 9.26, y: 10.43, w: 8.49, section: 'likes', title: "lorde at the greek theatre", body: []  },
+  { id: 'newspaper', src: img_newspaper, x: 9.26, y: 10.43, w: 8.49, section: 'likes', title: "live music", body: ["I love live music! A selection of recent concerts I've been to:"],
+    // dates come from each file's metadata (newest first); `video` is [webm, mp4]
+    concerts: [
+      { name: 'Between Friends', date: 'Sep 4, 2026', video: [mu_bf26webm, mu_bf26mp4] },
+      { name: 'Nemahsis', date: 'Apr 3, 2026', video: [mu_nemahsisWebm, mu_nemahsisMp4] },
+      { name: 'Lorde', date: 'Oct 19, 2025', video: [mu_lordeWebm, mu_lordeMp4] },
+      { name: 'Between Friends', date: 'Sep 26, 2025', photo: mu_bf25 },
+      { name: 'Coldplay', date: 'Jul 16, 2025', photo: mu_coldplay },
+    ],
+    article: { src: mu_dailycal, text: "The newspaper on my wall is The Daily Californian's article from when Lorde came to the Greek Theatre at Berkeley, one of the concerts above." } },
   { id: 'welcome', src: img_welcome, x: 21.2, y: 10.43, w: 5.7, section: 'experiences', title: "moma", body: []  },
   { id: 'plate', src: img_plate, x: 20.07, y: 18.29, w: 8.73, section: 'about', title: "pennsylvania", body: []  },
   { id: 'eye', src: img_eye, x: 29.04, y: 10.17, w: 5.76, section: 'likes', title: "eye painting", body: []  },
