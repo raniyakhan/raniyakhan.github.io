@@ -105,7 +105,10 @@ export const items = [
     scatter: [{ src: emb_heart, cut: true }, { src: emb_sybil }, { src: emb_tia }, { src: emb_flower }] },
   { id: 'flowerprint', src: img_flowerprint, x: 45.78, y: 9.4, w: 2.55, section: 'likes', title: "flower print", body: ["Lino cutting is fun! Some stamps I've made:"],
     scatter: [{ src: lino2 }, { src: lino3 }, { src: lino4 }, { src: lino1 }, { src: lino5 }], scatterKind: 's5' },
-  { id: 'sunset', src: img_sunset, x: 41.81, y: 21.03, w: 6.24, section: 'likes', title: "sunset painting", body: []  },
+  { id: 'sunset', src: img_sunset, x: 41.81, y: 21.03, w: 6.24, z: 30, section: 'likes', title: "sunset painting", body: [],
+    story: [
+      { p: "Marine View with a Sunset! One of my favorites from the Philadelphia Museum of Art.", link: { text: 'Marine View with a Sunset', href: 'https://www.philamuseum.org/objects/104452' } },
+    ] },
   { id: 'frame', src: img_frame, x: 50.83, y: 9.74, w: 9.38, section: 'about', title: "my people", body: []  },
   { id: 'mama', src: img_mama, x: 61.88, y: 8.89, w: 3.09, section: 'about', title: "mama", body: []  },
   { id: 'clock', src: img_clock, x: 64.13, y: 13.68, w: 8.91, section: 'about', title: "right now", body: []  },

@@ -119,3 +119,6 @@ footer a:focus-visible { outline: 2px solid var(--pen); outline-offset: 3px; }
 .close:focus-visible { outline: 2px solid var(--pen); outline-offset: 2px; }
 @keyframes drop { from { transform: translateY(-14px) rotate(-4deg); opacity: 0.4; } }
 @media (prefers-reduced-motion: reduce) { button.thing, .note, .cap { transition: none; animation: none; } }
+
+/* while a note's photos load */
+main.waiting, main.waiting .thing { cursor: progress; }
