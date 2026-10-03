@@ -55,7 +55,7 @@ function ItemNote({ item, onClose }) {
           ))}
         </div>
       )}
-      {item.hero && <img className="hero" src={item.hero} alt={item.title} />}
+      {item.hero && <img className={item.heroBig ? 'hero big' : 'hero'} src={item.hero} alt={item.title} />}
       {item.story?.map((b, j) => {
         if (b.row) {
           return (

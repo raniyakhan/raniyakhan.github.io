@@ -33,6 +33,7 @@ import me1 from './assets/about/me1.jpg'
 import me2 from './assets/about/me2.jpg'
 import me3 from './assets/about/me3.jpg'
 import me6 from './assets/about/me6.jpg'
+import mama_big from './assets/about/mama.jpg'
 import emb_heart from './assets/likes/emboss-heart.webp'
 import emb_sybil from './assets/likes/emboss-sybil.jpg'
 import emb_tia from './assets/likes/emboss-tia.jpg'
@@ -112,7 +113,7 @@ export const items = [
       { row: [marine_sunset] },
     ] },
   { id: 'frame', src: img_frame, x: 50.83, y: 9.74, w: 9.38, section: 'about', title: "my people", body: []  },
-  { id: 'mama', src: img_mama, x: 61.88, y: 8.89, w: 3.09, section: 'about', title: "mama", body: []  },
+  { id: 'mama', src: img_mama, x: 61.88, y: 8.89, w: 3.09, section: 'about', title: "mama", body: ["my mom #thegoat"], hero: mama_big, heroBig: true },
   { id: 'clock', src: img_clock, x: 64.13, y: 13.68, w: 8.91, section: 'about', title: "right now", body: []  },
   { id: 'door', src: img_door, x: 75.4, y: 16.1, w: 3.3, section: 'fun', title: "laser cutting", body: [
     "Laser cutting!! I very much enjoy watching shapes I've drawn on a screen come to life as real objects.",
