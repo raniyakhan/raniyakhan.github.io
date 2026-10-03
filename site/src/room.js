@@ -96,7 +96,7 @@ export const items = [
       { row: [moma_friend1, moma_mama, moma_friend2] },
       { row: [moma_side1, moma_side2] },
     ] },
-  { id: 'plate', src: img_plate, x: 20.07, y: 18.29, w: 8.73, section: 'about', title: "pennsylvania", body: []  },
+  { id: 'plate', src: img_plate, x: 20.07, y: 18.29, w: 8.73, section: 'about', title: "pennsylvania", body: ["I grew up in Scranton, Pennsylvania (the town where The Office takes place!)."] },
   { id: 'eye', src: img_eye, x: 29.04, y: 10.17, w: 5.76, section: 'likes', title: "eye painting", body: []  },
   { id: 'smallart', src: img_smallart, x: 36.64, y: 9.83, w: 3.33, section: 'likes', title: "little print", body: [],
     hero: zine_print,
