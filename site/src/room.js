@@ -48,6 +48,7 @@ import lino2 from './assets/likes/lino2.jpg'
 import lino3 from './assets/likes/lino3.jpg'
 import lino4 from './assets/likes/lino4.jpg'
 import lino5 from './assets/likes/lino5.jpg'
+import marine_sunset from './assets/likes/marine-view-sunset.jpg'
 import zine_print from './assets/likes/zine-print.webp'
 import book_now from './assets/likes/story-of-a-new-name.jpg'
 import fun_climbing from './assets/fun/climbing.jpg'
@@ -108,6 +109,7 @@ export const items = [
   { id: 'sunset', src: img_sunset, x: 41.81, y: 21.03, w: 6.24, z: 30, section: 'likes', title: "sunset painting", body: [],
     story: [
       { p: "Marine View with a Sunset! One of my favorites from the Philadelphia Museum of Art.", link: { text: 'Marine View with a Sunset', href: 'https://www.philamuseum.org/objects/104452' } },
+      { row: [marine_sunset] },
     ] },
   { id: 'frame', src: img_frame, x: 50.83, y: 9.74, w: 9.38, section: 'about', title: "my people", body: []  },
   { id: 'mama', src: img_mama, x: 61.88, y: 8.89, w: 3.09, section: 'about', title: "mama", body: []  },
