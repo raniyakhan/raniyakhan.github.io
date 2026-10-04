@@ -33,6 +33,8 @@ import me1 from './assets/about/me1.jpg'
 import me2 from './assets/about/me2.jpg'
 import me3 from './assets/about/me3.jpg'
 import me6 from './assets/about/me6.jpg'
+import berkeley from './assets/about/berkeley.jpg'
+import mama_big from './assets/about/mama.jpg'
 import emb_heart from './assets/likes/emboss-heart.webp'
 import emb_sybil from './assets/likes/emboss-sybil.jpg'
 import emb_tia from './assets/likes/emboss-tia.jpg'
@@ -43,6 +45,12 @@ import moma_mama from './assets/moma/mama-and-me.jpg'
 import moma_friend2 from './assets/moma/friend2.jpg'
 import moma_side1 from './assets/moma/side1.jpg'
 import moma_side2 from './assets/moma/side2.jpg'
+import lino1 from './assets/likes/lino1.jpg'
+import lino2 from './assets/likes/lino2.jpg'
+import lino3 from './assets/likes/lino3.jpg'
+import lino4 from './assets/likes/lino4.jpg'
+import lino5 from './assets/likes/lino5.jpg'
+import marine_sunset from './assets/likes/marine-view-sunset.jpg'
 import zine_print from './assets/likes/zine-print.webp'
 import book_now from './assets/likes/story-of-a-new-name.jpg'
 import fun_climbing from './assets/fun/climbing.jpg'
@@ -85,11 +93,11 @@ export const items = [
       { p: "Over the summer, my employee ID gave me free entry to the MoMA. I was there at least once a week." },
       { p: "I became completely enamored with Self-Portrait_Rachaph by Minjeong An.", link: { text: 'Self-Portrait_Rachaph', href: 'https://www.moma.org/collection/works/482257' } },
       { row: [moma_rachaph], narrow: true },
-      { p: "I got to show some friends and sketch while I was there too." },
+      { p: "I got to show some friends around while I was there too." },
       { row: [moma_friend1, moma_mama, moma_friend2] },
       { row: [moma_side1, moma_side2] },
     ] },
-  { id: 'plate', src: img_plate, x: 20.07, y: 18.29, w: 8.73, section: 'about', title: "pennsylvania", body: []  },
+  { id: 'plate', src: img_plate, x: 20.07, y: 18.29, w: 8.73, section: 'about', title: "pennsylvania", body: ["I grew up in Scranton, Pennsylvania (the town where The Office takes place!)."] },
   { id: 'eye', src: img_eye, x: 29.04, y: 10.17, w: 5.76, section: 'likes', title: "eye painting", body: []  },
   { id: 'smallart', src: img_smallart, x: 36.64, y: 9.83, w: 3.33, section: 'likes', title: "little print", body: [],
     hero: zine_print,
@@ -98,15 +106,20 @@ export const items = [
     ] },
   { id: 'heart', src: img_heart, x: 41.75, y: 13.25, w: 3.21, section: 'likes', title: "silver heart", body: ["I love gifting people metal-embossed items. Here's a few things I made:"], // scattered, uncropped; `cut` = transparent cutout, no photo border
     scatter: [{ src: emb_heart, cut: true }, { src: emb_sybil }, { src: emb_tia }, { src: emb_flower }] },
-  { id: 'flowerprint', src: img_flowerprint, x: 45.78, y: 9.4, w: 2.55, section: 'likes', title: "flower print", body: []  },
-  { id: 'sunset', src: img_sunset, x: 41.81, y: 21.03, w: 6.24, section: 'likes', title: "sunset painting", body: []  },
+  { id: 'flowerprint', src: img_flowerprint, x: 45.78, y: 9.4, w: 2.55, section: 'likes', title: "flower print", body: ["Lino cutting is fun! Some stamps I've made:"],
+    scatter: [{ src: lino2 }, { src: lino3 }, { src: lino4 }, { src: lino1 }, { src: lino5 }], scatterKind: 's5' },
+  { id: 'sunset', src: img_sunset, x: 41.81, y: 21.03, w: 6.24, z: 30, section: 'likes', title: "sunset painting", body: [],
+    story: [
+      { p: "Marine View with a Sunset! One of my favorites from the Philadelphia Museum of Art.", link: { text: 'Marine View with a Sunset', href: 'https://www.philamuseum.org/objects/104452' } },
+      { row: [marine_sunset] },
+    ] },
   { id: 'frame', src: img_frame, x: 50.83, y: 9.74, w: 9.38, section: 'about', title: "my people", body: []  },
-  { id: 'mama', src: img_mama, x: 61.88, y: 8.89, w: 3.09, section: 'about', title: "mama", body: []  },
+  { id: 'mama', src: img_mama, x: 61.88, y: 8.89, w: 3.09, section: 'about', title: "mama", body: ["my mom #thegoat"], hero: mama_big, heroBig: true },
   { id: 'clock', src: img_clock, x: 64.13, y: 13.68, w: 8.91, section: 'about', title: "right now", body: []  },
   { id: 'door', src: img_door, x: 75.4, y: 16.1, w: 3.3, section: 'fun', title: "laser cutting", body: [
     "Laser cutting!! I very much enjoy watching shapes I've drawn on a screen come to life as real objects.",
   ], photos: [fun_laser, fun_laser3, fun_laser4], videos: [[fun_laserMp4]] },
-  { id: 'berk', src: img_berk, x: 80.76, y: 11.11, w: 3.8, section: 'experiences', title: "berkeley", body: []  },
+  { id: 'berk', src: img_berk, x: 80.76, y: 11.11, w: 3.8, section: 'experiences', title: "berkeley", body: ["I'm currently a student at UC Berkeley, and I absolutely adore it here. It might actually be the most perfect place on Earth."], hero: berkeley, heroBig: true },
   { id: 'self', src: img_self, opens: 'about', x: 28.15, y: 19.66, w: 16.86, section: 'about', title: "about me", body: []  },
   { id: 'chair', src: img_chair, x: 57.84, y: 39.66, w: 26.37 },
   { id: 'shoes', src: img_shoes, x: 46.5, y: 76.07, w: 12.0, section: 'fun', title: "climbing", body: [
@@ -116,7 +129,7 @@ export const items = [
   ], photos: [fun_climbing] },
   { id: 'table', src: img_table, x: 78.86, y: 60.17, w: 16.86 },
   { id: 'orchid', src: img_orchid, x: 78.4, y: 39.5, w: 12.8, section: 'fun', title: "lego", body: []  },
-  { id: 'laptop', src: img_laptop, x: 84.92, y: 58.63, w: 10.81, section: 'projects', title: "projects", body: []  },
+  { id: 'laptop', src: img_laptop, opens: 'experiences', x: 84.92, y: 58.63, w: 10.81, section: 'experiences', title: "experiences", body: []  },
   { id: 'books', src: img_books, x: 15.08, y: 69.06, w: 11.4, section: 'likes', title: "currently reading", body: [], book: { cover: book_now, title: 'The Story of a New Name', author: 'Elena Ferrante' } },
   { id: 'coffee', src: img_coffee, x: 17.1, y: 62.39, w: 4.87, section: 'contact', title: "let's hang out", body: ["Always happy to chat about new opportunities or whatever you're excited about!"], link: { href: 'https://calendly.com/raniyakhan-berkeley/coffee-chat', label: "let's get coffee" }  },
   { id: 'phone', src: img_phone, x: 7.84, y: 78.29, w: 9.86, section: 'contact', title: "get in touch", body: ["Find me here!"], links: [
