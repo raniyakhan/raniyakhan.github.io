@@ -33,6 +33,7 @@ import me1 from './assets/about/me1.jpg'
 import me2 from './assets/about/me2.jpg'
 import me3 from './assets/about/me3.jpg'
 import me6 from './assets/about/me6.jpg'
+import berkeley from './assets/about/berkeley.jpg'
 import mama_big from './assets/about/mama.jpg'
 import emb_heart from './assets/likes/emboss-heart.webp'
 import emb_sybil from './assets/likes/emboss-sybil.jpg'
@@ -118,7 +119,7 @@ export const items = [
   { id: 'door', src: img_door, x: 75.4, y: 16.1, w: 3.3, section: 'fun', title: "laser cutting", body: [
     "Laser cutting!! I very much enjoy watching shapes I've drawn on a screen come to life as real objects.",
   ], photos: [fun_laser, fun_laser3, fun_laser4], videos: [[fun_laserMp4]] },
-  { id: 'berk', src: img_berk, x: 80.76, y: 11.11, w: 3.8, section: 'experiences', title: "berkeley", body: []  },
+  { id: 'berk', src: img_berk, x: 80.76, y: 11.11, w: 3.8, section: 'experiences', title: "berkeley", body: ["I'm currently a student at UC Berkeley, and I absolutely adore it here. It might actually be the most perfect place on Earth."], hero: berkeley, heroBig: true },
   { id: 'self', src: img_self, opens: 'about', x: 28.15, y: 19.66, w: 16.86, section: 'about', title: "about me", body: []  },
   { id: 'chair', src: img_chair, x: 57.84, y: 39.66, w: 26.37 },
   { id: 'shoes', src: img_shoes, x: 46.5, y: 76.07, w: 12.0, section: 'fun', title: "climbing", body: [
@@ -128,7 +129,7 @@ export const items = [
   ], photos: [fun_climbing] },
   { id: 'table', src: img_table, x: 78.86, y: 60.17, w: 16.86 },
   { id: 'orchid', src: img_orchid, x: 78.4, y: 39.5, w: 12.8, section: 'fun', title: "lego", body: []  },
-  { id: 'laptop', src: img_laptop, x: 84.92, y: 58.63, w: 10.81, section: 'projects', title: "projects", body: []  },
+  { id: 'laptop', src: img_laptop, opens: 'experiences', x: 84.92, y: 58.63, w: 10.81, section: 'experiences', title: "experiences", body: []  },
   { id: 'books', src: img_books, x: 15.08, y: 69.06, w: 11.4, section: 'likes', title: "currently reading", body: [], book: { cover: book_now, title: 'The Story of a New Name', author: 'Elena Ferrante' } },
   { id: 'coffee', src: img_coffee, x: 17.1, y: 62.39, w: 4.87, section: 'contact', title: "let's hang out", body: ["Always happy to chat about new opportunities or whatever you're excited about!"], link: { href: 'https://calendly.com/raniyakhan-berkeley/coffee-chat', label: "let's get coffee" }  },
   { id: 'phone', src: img_phone, x: 7.84, y: 78.29, w: 9.86, section: 'contact', title: "get in touch", body: ["Find me here!"], links: [
