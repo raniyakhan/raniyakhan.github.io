@@ -46,13 +46,13 @@ button.thing:hover .cap, button.thing:focus-visible .cap { opacity: 1; }
 .note .placeholder { color: var(--muted); }
 .note.page { width: min(680px, 100%); transform: rotate(-0.5deg); padding: 40px 44px 34px; }
 .note.page h2 { font-size: 34px; margin-bottom: 18px; }
-.exp { list-style: none; margin: 0; padding: 0; display: grid; gap: 30px; text-align: center; }
+.exp { list-style: none; margin: 0; padding: 0; display: grid; gap: 30px; text-align: left; }
 .exp p { margin: 0 0 4px; }
 .exp-head { font-size: 18px !important; font-weight: 700; }
 .exp-role { color: var(--pen); }
 .exp-meta { color: var(--muted); font-size: 14px !important; }
 .note.page.wide { width: min(760px, 100%); }
-.note.page.wide h2 { text-align: center; }
+.note.page.wide h2 { text-align: left; }
 .exp-text { min-width: 0; }
 .snaps { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 10px; }
 .snap { height: 170px; width: auto; max-width: 100%; object-fit: cover; }
