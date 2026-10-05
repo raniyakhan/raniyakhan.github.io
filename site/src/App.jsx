@@ -36,7 +36,7 @@ function ItemNote({ item, onClose }) {
   // several photos/videos get a wider note and an even grid of tiles
   const media = (item.photos?.length ?? 0) + (item.videos?.length ?? 0)
   const grid = media > 1
-  const cls = item.hero ? 'note' : item.concerts || item.scatter || item.story?.some(b => b.row) ? 'note gallery wide' : grid ? 'note gallery' : 'note'
+  const cls = item.hero ? 'note' : item.concerts || item.memories || item.scatter || item.story?.some(b => b.row) ? 'note gallery wide' : grid ? 'note gallery' : 'note'
   return (
     <Sheet onClose={onClose} className={cls} labelledBy="note-title">
       <p className="eyebrow">{SECTIONS[item.section]}</p>
@@ -55,7 +55,7 @@ function ItemNote({ item, onClose }) {
           ))}
         </div>
       )}
-      {item.hero && <img className={item.heroBig ? 'hero big' : 'hero'} src={item.hero} alt={item.title} />}
+      {item.hero && !item.heroCaption && <img className={item.heroBig ? 'hero big' : 'hero'} src={item.hero} alt={item.title} />}
       {item.story?.map((b, j) => {
         if (b.row) {
           return (
@@ -68,6 +68,12 @@ function ItemNote({ item, onClose }) {
         const [before, after] = b.p.split(b.link.text)
         return <p key={j}>{before}<a className="cta inline" href={b.link.href} target="_blank" rel="noreferrer">{b.link.text}</a>{after}</p>
       })}
+      {item.hero && item.heroCaption && (
+        <figure className="hero-fig">
+          <img className={item.heroWide ? 'hero wide' : 'hero'} src={item.hero} alt={item.title} />
+          <figcaption>{item.heroCaption}</figcaption>
+        </figure>
+      )}
       {item.scatter && (
         <div className={`scatter ${item.scatterKind || ''}`}>
           {item.scatter.map((m, j) => (
@@ -81,6 +87,18 @@ function ItemNote({ item, onClose }) {
             <figure key={j} className="show">
               {c.video ? <Clip srcs={c.video} className="tile" label={`${c.name} video`} /> : <img className="tile" src={c.photo} alt={`${c.name} concert`} />}
               <figcaption><b>{c.name}</b><br />{c.date}</figcaption>
+            </figure>
+          ))}
+        </div>
+      )}
+      {item.memories && (
+        <div className="memories">
+          {item.memories.map((m, j) => (
+            <figure key={j} className="memory">
+              <div className="pola">
+                {m.video ? <Clip srcs={m.video} label={m.text} /> : <img src={m.photo} alt={m.text} />}
+              </div>
+              <figcaption><span className="num">{String(j + 1).padStart(2, '0')}</span>{m.text}</figcaption>
             </figure>
           ))}
         </div>

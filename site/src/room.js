@@ -51,6 +51,13 @@ import lino3 from './assets/likes/lino3.jpg'
 import lino4 from './assets/likes/lino4.jpg'
 import lino5 from './assets/likes/lino5.jpg'
 import marine_sunset from './assets/likes/marine-view-sunset.jpg'
+import nyc_manhattan from './assets/nyc/manhattan.jpg'
+import nyc_knicks from './assets/nyc/knicks.jpg'
+import nyc_bryant from './assets/nyc/bryant-park.jpg'
+import nyc_strangers from './assets/nyc/strangers.jpg'
+import nyc_wsp from './assets/nyc/wsp.jpg'
+import nyc_jazzMp4 from './assets/nyc/jazz.mp4'
+import eye_postcard from './assets/likes/eye-postcard.jpg'
 import zine_print from './assets/likes/zine-print.webp'
 import book_now from './assets/likes/story-of-a-new-name.jpg'
 import fun_climbing from './assets/fun/climbing.jpg'
@@ -98,7 +105,11 @@ export const items = [
       { row: [moma_side1, moma_side2] },
     ] },
   { id: 'plate', src: img_plate, x: 20.07, y: 18.29, w: 8.73, section: 'about', title: "pennsylvania", body: ["I grew up in Scranton, Pennsylvania (the town where The Office takes place!)."] },
-  { id: 'eye', src: img_eye, x: 29.04, y: 10.17, w: 5.76, section: 'likes', title: "eye painting", body: []  },
+  { id: 'eye', src: img_eye, x: 29.04, y: 10.17, w: 5.76, section: 'likes', title: "galactic postcard", body: [],
+    story: [
+      { p: "A postcard I picked up at Daachi, an art exhibition in Lahore, a few years ago.", link: { text: 'Daachi', href: 'https://daachifoundation.com/' } },
+    ],
+    hero: eye_postcard, heroWide: true, heroCaption: '(from my actual bedroom wall)' },
   { id: 'smallart', src: img_smallart, x: 36.64, y: 9.83, w: 3.33, section: 'likes', title: "little print", body: [],
     hero: zine_print,
     story: [
@@ -113,9 +124,19 @@ export const items = [
       { p: "Marine View with a Sunset! One of my favorites from the Philadelphia Museum of Art.", link: { text: 'Marine View with a Sunset', href: 'https://www.philamuseum.org/objects/104452' } },
       { row: [marine_sunset] },
     ] },
-  { id: 'frame', src: img_frame, x: 50.83, y: 9.74, w: 9.38, section: 'about', title: "my people", body: []  },
+  { id: 'frame', src: img_frame, x: 50.83, y: 9.74, w: 9.38, section: 'about', title: "summer 2026", body: [
+    "I got to spend Summer 2026 in New York City. Arguably the greatest city in the world. Some of my favorite memories:",
+  ], // numbered photo cards, uncropped, zig-zagging down the note
+  memories: [
+    { text: 'Walking the length of Manhattan (15+ miles!)', photo: nyc_manhattan },
+    { text: 'The Knicks winning the NBA Finals', photo: nyc_knicks },
+    { text: 'Bryant Park movie nights', photo: nyc_bryant },
+    { text: 'The Strangers Project', photo: nyc_strangers },
+    { text: 'Washington Square Park, all day every day', photo: nyc_wsp },
+    { text: 'Lots of live jazz!', video: [nyc_jazzMp4] },
+  ] },
   { id: 'mama', src: img_mama, x: 61.88, y: 8.89, w: 3.09, section: 'about', title: "mama", body: ["my mom #thegoat"], hero: mama_big, heroBig: true },
-  { id: 'clock', src: img_clock, x: 64.13, y: 13.68, w: 8.91, section: 'about', title: "right now", body: []  },
+  { id: 'clock', src: img_clock, x: 64.13, y: 13.68, w: 8.91 },
   { id: 'door', src: img_door, x: 75.4, y: 16.1, w: 3.3, section: 'fun', title: "laser cutting", body: [
     "Laser cutting!! I very much enjoy watching shapes I've drawn on a screen come to life as real objects.",
   ], photos: [fun_laser, fun_laser3, fun_laser4], videos: [[fun_laserMp4]] },
@@ -128,7 +149,7 @@ export const items = [
     "Eventually I'd like to try it outside on real rock, where the problems weren't set by anyone at all.",
   ], photos: [fun_climbing] },
   { id: 'table', src: img_table, x: 78.86, y: 60.17, w: 16.86 },
-  { id: 'orchid', src: img_orchid, x: 78.4, y: 39.5, w: 12.8, section: 'fun', title: "lego", body: []  },
+  { id: 'orchid', src: img_orchid, x: 78.4, y: 39.5, w: 12.8 },
   { id: 'laptop', src: img_laptop, opens: 'experiences', x: 84.92, y: 58.63, w: 10.81, section: 'experiences', title: "experiences", body: []  },
   { id: 'books', src: img_books, x: 15.08, y: 69.06, w: 11.4, section: 'likes', title: "currently reading", body: [], book: { cover: book_now, title: 'The Story of a New Name', author: 'Elena Ferrante' } },
   { id: 'coffee', src: img_coffee, x: 17.1, y: 62.39, w: 4.87, section: 'contact', title: "let's hang out", body: ["Always happy to chat about new opportunities or whatever you're excited about!"], link: { href: 'https://calendly.com/raniyakhan-berkeley/coffee-chat', label: "let's get coffee" }  },
