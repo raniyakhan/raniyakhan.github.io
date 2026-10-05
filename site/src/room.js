@@ -124,7 +124,7 @@ export const items = [
       { p: "Marine View with a Sunset! One of my favorites from the Philadelphia Museum of Art.", link: { text: 'Marine View with a Sunset', href: 'https://www.philamuseum.org/objects/104452' } },
       { row: [marine_sunset] },
     ] },
-  { id: 'frame', src: img_frame, x: 50.83, y: 9.74, w: 9.38, section: 'about', title: "my people", body: [
+  { id: 'frame', src: img_frame, x: 50.83, y: 9.74, w: 9.38, section: 'about', title: "summer 2026", body: [
     "I got to spend Summer 2026 in New York City! Arguably the greatest city in the world.",
     "Some of my favorite memories:",
   ], // captioned photos, uncropped, in two columns
