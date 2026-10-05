@@ -95,8 +95,8 @@ function ItemNote({ item, onClose }) {
         <div className="memories">
           {item.memories.map((m, j) => (
             <figure key={j} className="memory">
-              {m.video ? <Clip srcs={m.video} label={m.text} /> : <img src={m.photo} alt={m.text} />}
               <figcaption>{m.text}</figcaption>
+              {m.video ? <Clip srcs={m.video} label={m.text} /> : <img src={m.photo} alt={m.text} />}
             </figure>
           ))}
         </div>
