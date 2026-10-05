@@ -125,15 +125,15 @@ export const items = [
       { row: [marine_sunset] },
     ] },
   { id: 'frame', src: img_frame, x: 50.83, y: 9.74, w: 9.38, section: 'about', title: "summer 2026", body: [
-    "I got to spend Summer 2026 in New York City! Arguably the greatest city in the world. Some of my favorite memories:",
+    "I got to spend Summer 2026 in New York City. Arguably the greatest city in the world. Some of my favorite memories:",
   ], // numbered photo cards, uncropped, zig-zagging down the note
   memories: [
-    { text: 'Walking the length of Manhattan (15+ miles)', photo: nyc_manhattan },
+    { text: 'Walking the length of Manhattan (15+ miles!)', photo: nyc_manhattan },
     { text: 'The Knicks winning the NBA Finals', photo: nyc_knicks },
     { text: 'Bryant Park movie nights', photo: nyc_bryant },
     { text: 'The Strangers Project', photo: nyc_strangers },
     { text: 'Washington Square Park, all day every day', photo: nyc_wsp },
-    { text: 'Lots of live jazz', video: [nyc_jazzMp4] },
+    { text: 'Lots of live jazz!', video: [nyc_jazzMp4] },
   ] },
   { id: 'mama', src: img_mama, x: 61.88, y: 8.89, w: 3.09, section: 'about', title: "mama", body: ["my mom #thegoat"], hero: mama_big, heroBig: true },
   { id: 'clock', src: img_clock, x: 64.13, y: 13.68, w: 8.91 },
