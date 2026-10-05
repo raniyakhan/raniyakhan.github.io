@@ -127,10 +127,10 @@ export const items = [
   { id: 'frame', src: img_frame, x: 50.83, y: 9.74, w: 9.38, section: 'about', title: "summer 2026", body: [
     "I got to spend Summer 2026 in New York City! Arguably the greatest city in the world.",
     "Some of my favorite memories:",
-  ], // captioned photos, uncropped, in two columns
+  ], // numbered photo cards, uncropped, zig-zagging down the note
   memories: [
     { text: 'Walking the length of Manhattan (15+ miles!)', photo: nyc_manhattan },
-    { text: 'Knicks winning the NBA Finals!', photo: nyc_knicks },
+    { text: 'The Knicks winning the NBA Finals!', photo: nyc_knicks },
     { text: 'Bryant Park movie nights', photo: nyc_bryant },
     { text: 'The Strangers Project', photo: nyc_strangers },
     { text: 'Washington Square Park, all day every day', photo: nyc_wsp },
