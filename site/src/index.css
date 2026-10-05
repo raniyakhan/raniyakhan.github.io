@@ -110,7 +110,7 @@ button.thing:hover .cap, button.thing:focus-visible .cap { opacity: 1; }
 .photo-row.narrow img { flex: 0 1 46%; }
 .cta.inline { margin-top: 0; display: inline; }
 .hero.big { width: min(320px, 80%); max-height: 52vh; object-fit: contain; margin-top: 16px; }
-.hero.wide { width: 92%; transform: rotate(-1.5deg); margin-bottom: 8px; }
+.hero.wide { width: auto; max-width: 92%; max-height: 62vh; transform: rotate(-1.5deg); margin-bottom: 8px; }
 .hero-fig { margin: 14px 0 0; text-align: center; }
 .hero-fig figcaption { font-size: 12px; font-style: italic; color: var(--muted); }
 .hero { display: block; width: min(270px, 70%); height: auto; margin: 6px auto 18px; transform: rotate(-2deg); filter: drop-shadow(0 8px 14px rgba(35, 32, 29, 0.25)); }
