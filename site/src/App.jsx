@@ -269,7 +269,7 @@ export default function App() {
           }
           return (
             <button key={it.id} className="thing" style={style} onClick={(e) => show(it.opens ?? it, e.currentTarget)} aria-label={`${it.title} (${SECTIONS[it.section]})`}>
-              <img src={it.src} alt="" draggable="false" />
+              <img src={it.src} alt="" draggable="false" style={it.flip ? { transform: 'scaleX(-1)' } : undefined} />
               <span className="cap">{it.title}</span>
             </button>
           )

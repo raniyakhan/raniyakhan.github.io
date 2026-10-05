@@ -141,7 +141,7 @@ export const items = [
     "Laser cutting!! I very much enjoy watching shapes I've drawn on a screen come to life as real objects.",
   ], photos: [fun_laser, fun_laser3, fun_laser4], videos: [[fun_laserMp4]] },
   { id: 'berk', src: img_berk, x: 80.76, y: 11.11, w: 3.8, section: 'experiences', title: "berkeley", body: ["I'm currently a student at UC Berkeley, and I absolutely adore it here. It might actually be the most perfect place on Earth."], hero: berkeley, heroBig: true },
-  { id: 'self', src: img_self, opens: 'about', x: 28.15, y: 19.66, w: 16.86, section: 'about', title: "about me", body: []  },
+  { id: 'self', src: img_self, flip: true, opens: 'about', x: 28.15, y: 19.66, w: 16.86, section: 'about', title: "about me", body: []  },
   { id: 'chair', src: img_chair, x: 57.84, y: 39.66, w: 26.37 },
   { id: 'shoes', src: img_shoes, x: 46.5, y: 76.07, w: 12.0, section: 'fun', title: "climbing", body: [
     "I've been getting into climbing lately, mostly bouldering.",
