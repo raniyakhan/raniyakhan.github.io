@@ -55,7 +55,7 @@ function ItemNote({ item, onClose }) {
           ))}
         </div>
       )}
-      {item.hero && <img className={item.heroBig ? 'hero big' : 'hero'} src={item.hero} alt={item.title} />}
+      {item.hero && !item.heroCaption && <img className={item.heroBig ? 'hero big' : 'hero'} src={item.hero} alt={item.title} />}
       {item.story?.map((b, j) => {
         if (b.row) {
           return (
@@ -68,6 +68,12 @@ function ItemNote({ item, onClose }) {
         const [before, after] = b.p.split(b.link.text)
         return <p key={j}>{before}<a className="cta inline" href={b.link.href} target="_blank" rel="noreferrer">{b.link.text}</a>{after}</p>
       })}
+      {item.hero && item.heroCaption && (
+        <figure className="hero-fig">
+          <img className={item.heroWide ? 'hero wide' : 'hero'} src={item.hero} alt={item.title} />
+          <figcaption>{item.heroCaption}</figcaption>
+        </figure>
+      )}
       {item.scatter && (
         <div className={`scatter ${item.scatterKind || ''}`}>
           {item.scatter.map((m, j) => (

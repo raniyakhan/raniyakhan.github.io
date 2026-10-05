@@ -57,6 +57,7 @@ import nyc_bryant from './assets/nyc/bryant-park.jpg'
 import nyc_strangers from './assets/nyc/strangers.jpg'
 import nyc_wsp from './assets/nyc/wsp.jpg'
 import nyc_jazzMp4 from './assets/nyc/jazz.mp4'
+import eye_postcard from './assets/likes/eye-postcard.jpg'
 import zine_print from './assets/likes/zine-print.webp'
 import book_now from './assets/likes/story-of-a-new-name.jpg'
 import fun_climbing from './assets/fun/climbing.jpg'
@@ -104,7 +105,11 @@ export const items = [
       { row: [moma_side1, moma_side2] },
     ] },
   { id: 'plate', src: img_plate, x: 20.07, y: 18.29, w: 8.73, section: 'about', title: "pennsylvania", body: ["I grew up in Scranton, Pennsylvania (the town where The Office takes place!)."] },
-  { id: 'eye', src: img_eye, x: 29.04, y: 10.17, w: 5.76, section: 'likes', title: "eye painting", body: []  },
+  { id: 'eye', src: img_eye, x: 29.04, y: 10.17, w: 5.76, section: 'likes', title: "eye painting", body: [],
+    story: [
+      { p: "A postcard I picked up at Daachi, an art exhibition in Lahore, a few years ago.", link: { text: 'Daachi', href: 'https://daachifoundation.com/' } },
+    ],
+    hero: eye_postcard, heroWide: true, heroCaption: '(from my actual bedroom wall)' },
   { id: 'smallart', src: img_smallart, x: 36.64, y: 9.83, w: 3.33, section: 'likes', title: "little print", body: [],
     hero: zine_print,
     story: [
