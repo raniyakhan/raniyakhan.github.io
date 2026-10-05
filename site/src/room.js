@@ -51,6 +51,12 @@ import lino3 from './assets/likes/lino3.jpg'
 import lino4 from './assets/likes/lino4.jpg'
 import lino5 from './assets/likes/lino5.jpg'
 import marine_sunset from './assets/likes/marine-view-sunset.jpg'
+import nyc_manhattan from './assets/nyc/manhattan.jpg'
+import nyc_knicks from './assets/nyc/knicks.jpg'
+import nyc_bryant from './assets/nyc/bryant-park.jpg'
+import nyc_strangers from './assets/nyc/strangers.jpg'
+import nyc_wsp from './assets/nyc/wsp.jpg'
+import nyc_jazzMp4 from './assets/nyc/jazz.mp4'
 import zine_print from './assets/likes/zine-print.webp'
 import book_now from './assets/likes/story-of-a-new-name.jpg'
 import fun_climbing from './assets/fun/climbing.jpg'
@@ -113,7 +119,18 @@ export const items = [
       { p: "Marine View with a Sunset! One of my favorites from the Philadelphia Museum of Art.", link: { text: 'Marine View with a Sunset', href: 'https://www.philamuseum.org/objects/104452' } },
       { row: [marine_sunset] },
     ] },
-  { id: 'frame', src: img_frame, x: 50.83, y: 9.74, w: 9.38, section: 'about', title: "my people", body: []  },
+  { id: 'frame', src: img_frame, x: 50.83, y: 9.74, w: 9.38, section: 'about', title: "my people", body: [
+    "I got to spend Summer 2026 in New York City! Arguably the greatest city in the world.",
+    "Some of my favorite memories:",
+  ], // captioned photos, uncropped, in two columns
+  memories: [
+    { text: 'Walking the length of Manhattan (15+ miles!)', photo: nyc_manhattan },
+    { text: 'Knicks winning the NBA Finals!', photo: nyc_knicks },
+    { text: 'Bryant Park movie nights', photo: nyc_bryant },
+    { text: 'The Strangers Project', photo: nyc_strangers },
+    { text: 'Washington Square Park, all day every day', photo: nyc_wsp },
+    { text: 'Lots of live jazz!', video: [nyc_jazzMp4] },
+  ] },
   { id: 'mama', src: img_mama, x: 61.88, y: 8.89, w: 3.09, section: 'about', title: "mama", body: ["my mom #thegoat"], hero: mama_big, heroBig: true },
   { id: 'clock', src: img_clock, x: 64.13, y: 13.68, w: 8.91, section: 'about', title: "right now", body: []  },
   { id: 'door', src: img_door, x: 75.4, y: 16.1, w: 3.3, section: 'fun', title: "laser cutting", body: [

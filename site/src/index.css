@@ -71,6 +71,10 @@ button.thing:hover .cap, button.thing:focus-visible .cap { opacity: 1; }
 .shows { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 12px; margin-top: 14px; }
 .show { margin: 0; width: calc((100% - 12px) / 2); text-align: center; }
 .show figcaption { margin-top: 6px; font-size: 14px; line-height: 1.35; }
+.memories { columns: 2; column-gap: 14px; margin-top: 14px; }
+.memory { break-inside: avoid; margin: 0 0 16px; }
+.memory img, .memory video { display: block; width: 100%; height: auto; box-shadow: 0 4px 12px rgba(35, 32, 29, 0.16); }
+.memory figcaption { margin-top: 6px; font-size: 14px; line-height: 1.35; }
 .article { display: flex; align-items: center; gap: 18px; margin-top: 22px; padding-top: 18px; border-top: 1px dashed rgba(35, 32, 29, 0.25); }
 .article img { width: 140px; height: auto; flex: none; box-shadow: 0 4px 14px rgba(35, 32, 29, 0.18); transform: rotate(-2deg); }
 .article p { margin: 0; }
