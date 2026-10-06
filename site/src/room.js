@@ -56,6 +56,7 @@ import nyc_knicks from './assets/nyc/knicks.jpg'
 import nyc_bryant from './assets/nyc/bryant-park.jpg'
 import nyc_strangers from './assets/nyc/strangers.jpg'
 import nyc_wsp from './assets/nyc/wsp.jpg'
+import nyc_sketches from './assets/nyc/sketches.jpg'
 import nyc_jazzMp4 from './assets/nyc/jazz.mp4'
 import eye_postcard from './assets/likes/eye-postcard.jpg'
 import zine_print from './assets/likes/zine-print.webp'
@@ -130,9 +131,10 @@ export const items = [
   memories: [
     { text: 'Walking the length of Manhattan (15+ miles!)', photo: nyc_manhattan },
     { text: 'The Knicks winning the NBA Finals', photo: nyc_knicks },
+    { text: 'Drawing silly sketches', photo: nyc_sketches },
     { text: 'Bryant Park movie nights', photo: nyc_bryant },
     { text: 'The Strangers Project', photo: nyc_strangers },
-    { text: 'Washington Square Park, all day every day', photo: nyc_wsp },
+    { text: 'Washington Square Park', photo: nyc_wsp },
     { text: 'Lots of live jazz!', video: [nyc_jazzMp4] },
   ] },
   { id: 'mama', src: img_mama, x: 61.88, y: 8.89, w: 3.09, section: 'about', title: "mama", body: ["my mom #thegoat"], hero: mama_big, heroBig: true },
