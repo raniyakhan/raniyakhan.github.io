@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { items, SECTIONS, ROOM_ASPECT, aboutPage, experiences } from './room.js'
+import Guestbook from './Guestbook.jsx'
 
 function Sheet({ onClose, className = 'note', labelledBy, children }) {
   const closeRef = useRef(null)
@@ -198,6 +199,15 @@ function ExperiencesPage({ onClose }) {
   )
 }
 
+function GuestbookPage({ onClose }) {
+  return (
+    <Sheet onClose={onClose} className="note page wide" labelledBy="page-title">
+      <h2 id="page-title">guestbook</h2>
+      <Guestbook />
+    </Sheet>
+  )
+}
+
 // every image URL inside a note's data (photos, rows, scatter, covers...)
 const isImg = (v) => typeof v === 'string' && (v.startsWith('data:image') || /\.(jpe?g|png|webp|gif|avif)$/i.test(v))
 function imagesIn(v, out = new Set()) {
@@ -206,7 +216,7 @@ function imagesIn(v, out = new Set()) {
   else if (v && typeof v === 'object') Object.entries(v).forEach(([k, x]) => k !== 'src' || !v.x ? imagesIn(x, out) : null)
   return out
 }
-const noteData = (what) => (what === 'about' ? aboutPage : what === 'experiences' ? experiences : what)
+const noteData = (what) => (what === 'about' ? aboutPage : what === 'experiences' ? experiences : what === 'guestbook' ? [] : what)
 
 // load + decode once; later calls reuse the same promise
 const ready = new Map()
@@ -236,7 +246,7 @@ export default function App() {
     return () => { stop = true; window.removeEventListener('load', start) }
   }, [])
 
-  // open is an object from the room, or 'about' / 'experiences' for the header pages.
+  // open is an object from the room, or 'about' / 'experiences' / 'guestbook' for the header pages.
   // The note waits for its images (up to 2.5s) so it drops in already filled.
   const show = async (what, el) => {
     lastFocus.current = el
@@ -257,6 +267,7 @@ export default function App() {
         <nav>
           <button className="link" onClick={(e) => show('about', e.currentTarget)}>about me</button>
           <button className="link" onClick={(e) => show('experiences', e.currentTarget)}>experiences</button>
+          <button className="link" onClick={(e) => show('guestbook', e.currentTarget)}>guestbook</button>
           <span className="hint">or click around!</span>
         </nav>
       </header>
@@ -284,6 +295,7 @@ export default function App() {
 
       {open === 'about' && <AboutPage onClose={hide} />}
       {open === 'experiences' && <ExperiencesPage onClose={hide} />}
+      {open === 'guestbook' && <GuestbookPage onClose={hide} />}
       {open && typeof open === 'object' && <ItemNote item={open} onClose={hide} />}
     </main>
   )

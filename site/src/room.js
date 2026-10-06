@@ -71,6 +71,7 @@ import img_laptop from './assets/room/laptop.webp'
 import img_books from './assets/room/bookstack.webp'
 import img_coffee from './assets/room/coffee.webp'
 import img_phone from './assets/room/phone.webp'
+import img_guestbook from './assets/room/guestbook.svg'
 
 export const SECTIONS = {
   about: 'about',
@@ -79,6 +80,7 @@ export const SECTIONS = {
   likes: 'things i like',
   fun: 'for fun',
   contact: 'contact',
+  guestbook: 'guestbook',
 }
 
 export const ROOM_ASPECT = 1684 / 1170
@@ -141,6 +143,7 @@ export const items = [
     "Laser cutting!! I very much enjoy watching shapes I've drawn on a screen come to life as real objects.",
   ], photos: [fun_laser, fun_laser3, fun_laser4], videos: [[fun_laserMp4]] },
   { id: 'berk', src: img_berk, x: 80.76, y: 11.11, w: 3.8, section: 'experiences', title: "berkeley", body: ["I'm currently a student at UC Berkeley, and I absolutely adore it here. It might actually be the most perfect place on Earth."], hero: berkeley, heroBig: true },
+  { id: 'guestbook', src: img_guestbook, opens: 'guestbook', x: 7.6, y: 30.5, w: 9.5, section: 'guestbook', title: 'guestbook', body: [] },
   { id: 'self', src: img_self, flip: true, opens: 'about', x: 26.65, y: 18.4, w: 16.86, section: 'about', title: "about me", body: []  },
   { id: 'chair', src: img_chair, x: 57.84, y: 39.66, w: 26.37 },
   { id: 'shoes', src: img_shoes, x: 46.5, y: 76.07, w: 12.0, section: 'fun', title: "climbing", body: [
